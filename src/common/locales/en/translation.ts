@@ -8,7 +8,11 @@ const EN = {
     'schools': 'Schools',
     'skills': 'Skills',
     'locations': 'Locations',
-    'admins': 'Administrators',
+    'employees': 'Employees',
+    'settings': 'Settings',
+
+    'total': 'Total',
+
 }
 
 export default EN

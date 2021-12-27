@@ -1,13 +1,13 @@
 import Header from "../../components/Header/Header"
 import AppLayout from "../../layouts/AppLayout"
 
-const Home: React.FC = () => {
+const Vacancies: React.FC = () => {
     return (
         <AppLayout>
             <section>
             <Header>
                 <h1 className="text-lg font-bold">
-                    Dashboard
+                    Vacancies
                 </h1>
             </Header>
 
@@ -19,4 +19,4 @@ const Home: React.FC = () => {
     )
 }
 
-export default Home
+export default Vacancies

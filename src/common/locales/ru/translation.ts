@@ -8,7 +8,10 @@ const RU = {
     'schools': 'Учебные заведения',
     'skills': 'Навыки и умения',
     'locations': 'Локации',
-    'admins': 'Администраторы',
+    'employees': 'Сотрудники',
+    'settings': 'Настройки',
+
+    'total': 'Всего',
 }
 
 export default RU

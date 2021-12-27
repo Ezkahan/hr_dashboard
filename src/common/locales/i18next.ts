@@ -14,12 +14,12 @@ const resources = {
     },
 }
 
-let defaultLocale = localStorage.getItem('locale') ?? 'ru'
+let defaultLocale = localStorage.getItem('orlan_locale') ?? 'ru'
 
 if(defaultLocale === null)
 {
     localStorage.setItem('locale', 'ru')
-    defaultLocale = localStorage.getItem('locale') ?? 'ru'
+    defaultLocale = localStorage.getItem('orlan_locale') ?? 'ru'
 }
 
 i18n.use(initReactI18next)
