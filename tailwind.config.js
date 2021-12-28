@@ -6,6 +6,10 @@ module.exports = {
     extend: {
       colors: {
         'dark-purple': '#130e3d',
+      },
+      fontFamily: {
+        'montserrat-medium': ['Montserrat-Medium'],
+        'montserrat-regular': ['Montserrat-Regular'],
       }
     },
   },
