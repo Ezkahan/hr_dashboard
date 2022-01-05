@@ -9,7 +9,7 @@ module.exports = {
       },
       fontFamily: {
         'montserrat-medium': ['Montserrat-Medium'],
-        'montserrat-regular': ['Montserrat-Regular'],
+        'montserrat-bold': ['Montserrat-Bold'],
       }
     },
   },

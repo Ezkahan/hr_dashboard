@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import Login from '../pages/Auth/Login'
 import Companies from '../pages/Companies/Companies'
+import Chat from '../pages/Dashboard/Chat'
 import Dashboard from '../pages/Dashboard/Dashboard'
 import Educations from '../pages/Educations/Educations'
 import Employees from '../pages/Employees/Employees'
@@ -23,6 +24,7 @@ const WebRoutes = () => {
             <Route path="/skills" element={<Skills />} />
             <Route path="/locations" element={<Locations />} />
             <Route path="/employees" element={<Employees />} />
+            <Route path="/chats" element={<Chat />} />
         </Routes>
     )
 }

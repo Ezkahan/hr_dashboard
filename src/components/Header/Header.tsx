@@ -5,7 +5,7 @@ import Locale from "../Locale/Locale"
 
 const Header: React.FC<IChildren> = ({children}: IChildren) => {
     return (
-        <header className="flex justify-between items-center bg-slate-100 px-5 py-2">
+        <header className="flex justify-between items-center bg-slate-100 px-5 py-2 fixed top-0 xl:left-72 left-0 right-0">
             {children}
             <aside className="flex">
                 <NavLink to="/login" className="flex items-center justify-center w-10 h-10 rounded-full">

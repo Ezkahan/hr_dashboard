@@ -6,7 +6,7 @@ import Sidebar from '../components/Navigation/Sidebar'
 const AppLayout = ({children}: IChildren) => {
 
     return (
-        <section className="font-montserrat-regular">
+        <section className="font-montserrat-medium">
             <Sidebar />
             <MainContainer>
                 { children }

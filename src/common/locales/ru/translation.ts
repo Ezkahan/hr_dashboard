@@ -12,6 +12,15 @@ const RU = {
     'settings': 'Настройки',
 
     'total': 'Всего',
+    'id': 'ID',
+    'name': 'Название',
+    'description': 'Описание',
+    'phone': 'Телефон',
+    'fax': 'Факс',
+    'email': 'Почта',
+    'website': 'Веб сайт',
+    'unknown': 'Неизвестный',
+    'category': 'Категория',
 }
 
 export default RU

@@ -12,6 +12,15 @@ const EN = {
     'settings': 'Settings',
 
     'total': 'Total',
+    'id': 'ID',
+    'name': 'Name',
+    'description': 'Description',
+    'phone': 'Phone',
+    'fax': 'Fax',
+    'email': 'Email',
+    'website': 'Website',
+    'unknown': 'Unknown',
+    'category': 'Category',
 
 }
 
