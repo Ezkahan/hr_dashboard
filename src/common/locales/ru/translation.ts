@@ -11,6 +11,7 @@ const RU = {
     'employees': 'Сотрудники',
     'settings': 'Настройки',
 
+    'loading': 'Загрузка',
     'total': 'Всего',
     'id': 'ID',
     'name': 'Название',
@@ -21,6 +22,26 @@ const RU = {
     'website': 'Веб сайт',
     'unknown': 'Неизвестный',
     'category': 'Категория',
+    'search': 'Поиск',
+    'new': 'Новый',
+    'create': 'Создать',
+    'update': 'Обновить',
+    'save': 'Сохранить',
+    'delete': 'Удалить',
+    'yes': 'Да',
+    'no': 'Нет',
+
+    'new_company': 'Новая компания',
+    'company_name': 'Название компании',
+    'company_phone': 'Телефон компании',
+    'company_fax': 'Факс компании',
+    'company_email': 'Электронный адрес компании',
+    'company_website': 'Веб-сайт компании',
+    'input_company_name': 'Введите название компании',
+    'input_company_phone': 'Введите телефон компании',
+    'input_company_fax': 'Введите факс компании',
+    'input_company_email': 'Введите адрес электронной почты компании',
+    'input_company_website': 'Введите веб-сайт компании',
 }
 
 export default RU

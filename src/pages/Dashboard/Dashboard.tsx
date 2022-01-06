@@ -32,14 +32,14 @@ const Dashboard: React.FC = () => {
 
     return (
         <AppLayout>
-            <section>
+            <section className="xl:p-5">
             <Header>
                 <h1 className="text-lg font-bold">
                     {t('dashboard')}
                 </h1>
             </Header>
 
-            <main className="grid grid-cols-12 gap-6 my-3 p-5">
+            <main className="bg-white grid grid-cols-12 gap-6 my-3 rounded-3xl p-5">
                 <NavLink to="/companies" className="col-span-12 xl:col-span-4 flex items-center justify-between bg-sky-100/50 text-sky-900/80 p-4 rounded-3xl hover:bg-sky-200 hover:scale-105 duration-500">
                     <aside className="flex items-center px-2">
                         <IoBusinessOutline size={48} />

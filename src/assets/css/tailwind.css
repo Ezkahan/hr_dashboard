@@ -13,8 +13,20 @@
         src: url('../fonts/Montserrat-Bold.ttf');
     }
 
+    body {
+        background: rgb(241,245,249);
+    }
+
     *:focus {
         outline: none !important;
+    }
+
+    ::-webkit-scrollbar {
+        background: #eee;
+        width: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: rgb(19, 14, 61);
     }
 
     .page-link a {

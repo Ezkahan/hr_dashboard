@@ -11,6 +11,7 @@ const EN = {
     'employees': 'Employees',
     'settings': 'Settings',
 
+    'loading': 'Loading',
     'total': 'Total',
     'id': 'ID',
     'name': 'Name',
@@ -21,6 +22,26 @@ const EN = {
     'website': 'Website',
     'unknown': 'Unknown',
     'category': 'Category',
+    'search': 'Search',
+    'new': 'New',
+    'create': 'Create',
+    'update': 'Update',
+    'save': 'Save',
+    'delete': 'Delete',
+    'yes': 'Yes',
+    'no': 'No',
+
+    'new_company': 'New company',
+    'company_name': 'Company name',
+    'company_phone': 'Company phone',
+    'company_fax': 'Company fax',
+    'company_email': 'Company email',
+    'company_website': 'Company website',
+    'input_company_name': 'Input company name',
+    'input_company_phone': 'Input company phone',
+    'input_company_fax': 'Input company fax',
+    'input_company_email': 'Input company email',
+    'input_company_website': 'Input company website',
 
 }
 
