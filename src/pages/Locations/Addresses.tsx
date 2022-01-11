@@ -8,16 +8,27 @@ import { NavLink } from "react-router-dom"
 import MiniLoader from "../../components/Loader/MiniLoader"
 import { IoLocationOutline, IoArrowForwardCircleOutline } from "react-icons/io5"
 
-const Locations: React.FC = () => {
+const Addresses: React.FC = () => {
     const {t} = useTranslation()
     const [page, setPage] = useState(1)
 
-    const _COUNTRIES = gql`
-        query GetCountries {
-            countries(first: 30, page: ${page}, orderBy: [{column: ID, order: DESC}]) {
+    const _ADDRESSES = gql`
+        query GetAddresses {
+            addresses(first: 30, page: ${page}, orderBy: [{column: ID, order: DESC}]) {
                 data {
                     id
-                    name
+                    address
+                    district
+                    status
+                    country {
+                        name
+                    }
+                    town {
+                        name
+                    }
+                    area {
+                        name
+                    }
                 }
                 paginatorInfo {
                     total
@@ -27,14 +38,14 @@ const Locations: React.FC = () => {
         }
     `;
 
-    const {loading, error, data} = useQuery(_COUNTRIES)
+    const {loading, error, data} = useQuery(_ADDRESSES)
 
     return (
         <AppLayout>
             <section className="xl:p-5 p-1">
             <Header>
                 <h1 className="text-lg font-bold">
-                    {t('locations')}
+                    {t('addresses')}
                 </h1>
             </Header>
 
@@ -99,7 +110,7 @@ const Locations: React.FC = () => {
                     </div>
 
                     <div className="ml-5">
-                        <NavLink to="/country/create" className="border border-indigo-500 hover:bg-indigo-600 text-indigo-600 hover:text-white duration-300 px-4 py-2 rounded-lg">
+                        <NavLink to="/address/add" className="border border-indigo-500 hover:bg-indigo-600 text-indigo-600 hover:text-white duration-300 px-4 py-2 rounded-lg">
                             {t('add')}
                         </NavLink>
                     </div>
@@ -114,25 +125,48 @@ const Locations: React.FC = () => {
                 }
 
                 {
-                    data && data.countries.data &&
+                    data && data.addresses.data &&
 
                     <section className="overflow-x-auto">
                         <table className="w-full text-sm">
                             <thead className="bg-slate-100 text-left text-gray-800">
                                 <tr className="border-b border-gray-100">
                                     <th className="px-4 py-3 w-20 rounded-tl-lg rounded-bl-lg">{t('id')}</th>
-                                    <th className="px-4 py-3">{t('name')}</th>
+                                    <th className="px-4 py-3">{t('address')}</th>
+                                    <th className="px-4 py-3">{t('country')}</th>
+                                    <th className="px-4 py-3">{t('town')}</th>
+                                    <th className="px-4 py-3">{t('area')}</th>
+                                    <th className="px-4 py-3">{t('district')}</th>
+                                    <th className="px-4 py-3">{t('status')}</th>
                                 </tr>
                             </thead>
                             
                             <tbody>
                                 {
-                                    data && data.countries.data.map((country: any, index: number) => {
+                                    data && data.addresses.data.map((address: any, index: number) => {
                                         return (
                                             <tr key={index} className="border-b border-stone-100 text-indigo-900/80">
-                                                <td className="border-r border-stone-100 px-3 py-2 text-xs">{country.id}</td>
-                                                <td className="w-96 px-3 py-2">
-                                                    <h1 className="font-bold">{country.name}</h1>
+                                                <td className="border-r border-stone-100 px-3 py-2 text-xs">{address.id}</td>
+                                                <td className="px-3 py-2">
+                                                    <h1 className="font-bold">{address.address}</h1>
+                                                </td>
+                                                <td className="px-3 py-2">
+                                                    <h1 className="font-bold">{address.country && address.country.name}</h1>
+                                                </td>
+                                                <td className="px-3 py-2">
+                                                    <h1 className="font-bold">{address.town && address.town.name}</h1>
+                                                </td>
+
+                                                <td className="px-3 py-2">
+                                                    <h1 className="font-bold">{address.area && address.area.name}</h1>
+                                                </td>
+
+                                                <td className="px-3 py-2">
+                                                    <h1 className="font-bold">{address.district}</h1>
+                                                </td>
+
+                                                <td className="w-10 px-3 py-2">
+                                                    <h1 className="font-bold">{address.status}</h1>
                                                 </td>
                                             </tr>
                                         )
@@ -149,7 +183,7 @@ const Locations: React.FC = () => {
                 nextClassName={'hidden'}
                 breakLabel={'...'}
                 breakClassName={'bg-white rounded-lg border-gray-300 text-gray-500 hover:bg-gray-50 md:inline-flex relative items-center m-1 px-4 py-2 border text-sm'}
-                pageCount={data && data.countries.paginatorInfo.lastPage}
+                pageCount={data && data.addresses.paginatorInfo.lastPage}
                 marginPagesDisplayed={1}
                 pageRangeDisplayed={3}
                 onPageChange={(data) => setPage(data.selected+1)}
@@ -162,4 +196,4 @@ const Locations: React.FC = () => {
     )
 }
 
-export default Locations
+export default Addresses

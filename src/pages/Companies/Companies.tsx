@@ -4,7 +4,6 @@ import AppLayout from "../../layouts/AppLayout"
 import { useTranslation } from "react-i18next"
 import { useState } from 'react'
 import ReactPaginate from 'react-paginate'
-import FullLoader from '../../components/Loader/FullLoader'
 import MiniLoader from '../../components/Loader/MiniLoader'
 import Error from '../../components/Error/Error'
 import { NavLink } from 'react-router-dom'
@@ -39,71 +38,76 @@ const Companies: React.FC = () => {
 
     return (
         <AppLayout>
-            <section className="p-5">
+            <section className="xl:p-5 p-1">
             <Header>
                 <h1 className="text-lg font-bold">
                     {t('companies')}
                 </h1>
             </Header>
 
-            {
-                loading && <MiniLoader />
-            }
-
-            {
-                error && <Error message="Error" />
-            }
-
-            <main className="bg-white px-8 py-6 mb-5 rounded-lg overflow-x-auto">
+            <main className="bg-white xl:px-8 px-6 xl:py-6 py-4 mb-5 rounded-lg">
                 <header className=" flex justify-between items-center py-3 mb-5">
                     <div className="w-full xl:w-4/12">
                         <input type="text" className="border border-slate-200 px-5 py-2 rounded-lg w-full" placeholder={t('search')} />
                     </div>
 
-                    <div>
+                    <div className="ml-5">
                         <NavLink to="/company/create" className="border border-indigo-500 hover:bg-indigo-600 text-indigo-600 hover:text-white duration-300 px-4 py-2 rounded-lg">
                             {t('create')}
                         </NavLink>
                     </div>
                 </header>
 
-                <table className="w-full text-sm">
-                    <thead className="bg-slate-100 text-left text-gray-800">
-                        <tr>
-                            <th className="px-4 py-3 w-20 rounded-tl-lg rounded-bl-lg">{t('id')}</th>
-                            <th className="px-4 py-3 w-96">{t('name')}</th>
-                            <th className="px-4 py-3">{t('description')}</th>
-                            <th className="px-4 py-3">{t('phone')}</th>
-                            <th className="px-4 py-3 rounded-tr-lg rounded-br-lg">{t('email')}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            data && data.companies.data.map((company: any, index: number) => {
-                                return (
-                                    <tr key={index} className="border-b border-stone-100 text-indigo-900/80">
-                                        <td className="border-r border-stone-100 px-4 py-3 text-xs">{company.id}</td>
-                                        <td className="border-r border-stone-100 w-96 px-4 py-3">
-                                            <h1 className="font-bold">{company.name}</h1>
-                                        </td>
-                                        <td className="border-r border-stone-100 px-4 py-3">
-                                            <p>{company.description}</p>
-                                        </td>
+                {
+                    loading && <MiniLoader />
+                }
 
-                                        <td className="border-r border-stone-100 px-4 py-3">
-                                            <p>{company.phone}</p>
-                                        </td>
+                {
+                    error && error.message
+                }
 
-                                        <td className="px-4 py-3">
-                                            <p>{company.email}</p>
-                                        </td>
+                {
+                    data && data.companies.data &&
 
-                                    </tr>
-                                )
-                            })
-                        }
-                    </tbody>
-                </table>
+                    <section className="overflow-x-auto">
+                        <table className="w-full text-sm">
+                            <thead className="bg-slate-100 text-left text-gray-800">
+                                <tr>
+                                    <th className="px-4 py-3 w-20 rounded-tl-lg rounded-bl-lg">{t('id')}</th>
+                                    <th className="px-4 py-3 w-96">{t('name')}</th>
+                                    <th className="px-4 py-3">{t('description')}</th>
+                                    <th className="px-4 py-3">{t('phone')}</th>
+                                    <th className="px-4 py-3 rounded-tr-lg rounded-br-lg">{t('email')}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    data.companies.data.map((company: any, index: number) => {
+                                        return (
+                                            <tr key={index} className="border-b border-stone-100 text-indigo-900/80">
+                                                <td className="border-r border-stone-100 px-4 py-3 text-xs">{company.id}</td>
+                                                <td className="border-r border-stone-100 w-96 px-4 py-3">
+                                                    <h1 className="font-bold">{company.name}</h1>
+                                                </td>
+                                                <td className="border-r border-stone-100 px-4 py-3">
+                                                    <p>{company.description}</p>
+                                                </td>
+
+                                                <td className="border-r border-stone-100 px-4 py-3">
+                                                    <p>{company.phone}</p>
+                                                </td>
+
+                                                <td className="px-4 py-3">
+                                                    <p>{company.email}</p>
+                                                </td>
+                                            </tr>
+                                        )
+                                    })
+                                }
+                            </tbody>
+                        </table>
+                    </section>
+                }
             </main>
 
             <ReactPaginate

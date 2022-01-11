@@ -10,6 +10,10 @@ const EN = {
     'locations': 'Locations',
     'employees': 'Employees',
     'settings': 'Settings',
+    
+    'username': 'Username',
+    'password': 'Password',
+    'signin': 'Sign in',
 
     'loading': 'Loading',
     'total': 'Total',
@@ -24,12 +28,15 @@ const EN = {
     'category': 'Category',
     'search': 'Search',
     'new': 'New',
+    'add': 'Add',
     'create': 'Create',
     'update': 'Update',
     'save': 'Save',
     'delete': 'Delete',
     'yes': 'Yes',
     'no': 'No',
+    'empty_list': 'Empty list',
+    'cancel': 'Cancel',
 
     'new_company': 'New company',
     'company_name': 'Company name',
@@ -37,11 +44,24 @@ const EN = {
     'company_fax': 'Company fax',
     'company_email': 'Company email',
     'company_website': 'Company website',
+    'company_description': 'Company description',
     'input_company_name': 'Input company name',
     'input_company_phone': 'Input company phone',
     'input_company_fax': 'Input company fax',
     'input_company_email': 'Input company email',
     'input_company_website': 'Input company website',
+    'input_company_description': 'Input company description',
+
+    'countries': 'Countries',
+    'towns': 'Towns',
+    'areas': 'Areas',
+    'addresses': 'Addresses',
+    'address': 'Address',
+    'country': 'Country',
+    'town': 'Town',
+    'area': 'Area',
+    'district': 'District',
+    'status': 'Status',
 
 }
 

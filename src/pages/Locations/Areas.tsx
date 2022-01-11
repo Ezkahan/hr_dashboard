@@ -8,13 +8,13 @@ import { NavLink } from "react-router-dom"
 import MiniLoader from "../../components/Loader/MiniLoader"
 import { IoLocationOutline, IoArrowForwardCircleOutline } from "react-icons/io5"
 
-const Locations: React.FC = () => {
+const Areas: React.FC = () => {
     const {t} = useTranslation()
     const [page, setPage] = useState(1)
 
-    const _COUNTRIES = gql`
-        query GetCountries {
-            countries(first: 30, page: ${page}, orderBy: [{column: ID, order: DESC}]) {
+    const _AREAS = gql`
+        query GetAreas {
+            areas(first: 30, page: ${page}, orderBy: [{column: ID, order: DESC}]) {
                 data {
                     id
                     name
@@ -27,14 +27,14 @@ const Locations: React.FC = () => {
         }
     `;
 
-    const {loading, error, data} = useQuery(_COUNTRIES)
+    const {loading, error, data} = useQuery(_AREAS)
 
     return (
         <AppLayout>
             <section className="xl:p-5 p-1">
             <Header>
                 <h1 className="text-lg font-bold">
-                    {t('locations')}
+                    {t('areas')}
                 </h1>
             </Header>
 
@@ -99,7 +99,7 @@ const Locations: React.FC = () => {
                     </div>
 
                     <div className="ml-5">
-                        <NavLink to="/country/create" className="border border-indigo-500 hover:bg-indigo-600 text-indigo-600 hover:text-white duration-300 px-4 py-2 rounded-lg">
+                        <NavLink to="/area/add" className="border border-indigo-500 hover:bg-indigo-600 text-indigo-600 hover:text-white duration-300 px-4 py-2 rounded-lg">
                             {t('add')}
                         </NavLink>
                     </div>
@@ -114,7 +114,7 @@ const Locations: React.FC = () => {
                 }
 
                 {
-                    data && data.countries.data &&
+                    data && data.areas.data &&
 
                     <section className="overflow-x-auto">
                         <table className="w-full text-sm">
@@ -127,7 +127,7 @@ const Locations: React.FC = () => {
                             
                             <tbody>
                                 {
-                                    data && data.countries.data.map((country: any, index: number) => {
+                                    data && data.areas.data.map((country: any, index: number) => {
                                         return (
                                             <tr key={index} className="border-b border-stone-100 text-indigo-900/80">
                                                 <td className="border-r border-stone-100 px-3 py-2 text-xs">{country.id}</td>
@@ -149,7 +149,7 @@ const Locations: React.FC = () => {
                 nextClassName={'hidden'}
                 breakLabel={'...'}
                 breakClassName={'bg-white rounded-lg border-gray-300 text-gray-500 hover:bg-gray-50 md:inline-flex relative items-center m-1 px-4 py-2 border text-sm'}
-                pageCount={data && data.countries.paginatorInfo.lastPage}
+                pageCount={data && data.areas.paginatorInfo.lastPage}
                 marginPagesDisplayed={1}
                 pageRangeDisplayed={3}
                 onPageChange={(data) => setPage(data.selected+1)}
@@ -162,4 +162,4 @@ const Locations: React.FC = () => {
     )
 }
 
-export default Locations
+export default Areas

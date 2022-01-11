@@ -6,9 +6,14 @@ import Chat from '../pages/Dashboard/Chat'
 import Dashboard from '../pages/Dashboard/Dashboard'
 import Educations from '../pages/Educations/Educations'
 import Employees from '../pages/Employees/Employees'
+import Addresses from '../pages/Locations/Addresses'
+import Areas from '../pages/Locations/Areas'
+import Countries from '../pages/Locations/Countries'
 import Locations from '../pages/Locations/Locations'
+import Towns from '../pages/Locations/Towns'
 import People from '../pages/People/People'
 import Schools from '../pages/Schools/Schools'
+import Settings from '../pages/Settings/Settings'
 import Skills from '../pages/Skills/Skills'
 import Vacancies from '../pages/Vacancies/Vacancies'
 
@@ -26,6 +31,11 @@ const WebRoutes = () => {
             <Route path="/skills" element={<Skills />} />
             <Route path="/locations" element={<Locations />} />
             <Route path="/employees" element={<Employees />} />
+            <Route path="/countries" element={<Countries />} />
+            <Route path="/towns" element={<Towns />} />
+            <Route path="/areas" element={<Areas />} />
+            <Route path="/addresses" element={<Addresses />} />
+            <Route path="/settings" element={<Settings />} />
             <Route path="/chats" element={<Chat />} />
         </Routes>
     )

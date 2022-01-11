@@ -3,22 +3,22 @@ import { io } from "socket.io-client";
 import Header from "../../components/Header/Header";
 import AppLayout from "../../layouts/AppLayout";
 
-const socket = io("http://localhost:3000");
+// const socket = io("http://localhost:3000");
 
 const Chat = () => {
   const [hatlar, setHatlar] = useState([]);
   const [mess, setMess] = useState();
 
-  useEffect(() => {
-    socket.on("client_message", (message) => {
-      setHatlar({ ...hatlar, hat: message });
-      console.log(hatlar.length > 0);
-    });
-  }, [socket]);
+  // useEffect(() => {
+  //   socket.on("client_message", (message) => {
+  //     setHatlar({ ...hatlar, hat: message });
+  //     console.log(hatlar.length > 0);
+  //   });
+  // }, [socket]);
 
-  const sendMessage = (message) => {
-    socket.emit("message", message);
-  };
+  // const sendMessage = (message) => {
+  //   socket.emit("message", message);
+  // };
 
   return (
     <AppLayout>
@@ -37,7 +37,7 @@ const Chat = () => {
           <div className="mt-4">
             <button
               className="bg-slate-700 rounded-lg text-white px-5 py-2 font-bold"
-              onClick={() => sendMessage(mess)}
+              // onClick={() => sendMessage(mess)}
             >
               SEND
             </button>

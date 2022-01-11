@@ -11,6 +11,10 @@ const RU = {
     'employees': 'Сотрудники',
     'settings': 'Настройки',
 
+    'username': 'Имя пользователя',
+    'password': 'Пароль',
+    'signin': 'Войти',
+
     'loading': 'Загрузка',
     'total': 'Всего',
     'id': 'ID',
@@ -24,12 +28,15 @@ const RU = {
     'category': 'Категория',
     'search': 'Поиск',
     'new': 'Новый',
+    'add': 'Добавить',
     'create': 'Создать',
     'update': 'Обновить',
     'save': 'Сохранить',
     'delete': 'Удалить',
     'yes': 'Да',
     'no': 'Нет',
+    'empty_list': 'Список пуст',
+    'cancel': 'Отмена',
 
     'new_company': 'Новая компания',
     'company_name': 'Название компании',
@@ -37,11 +44,24 @@ const RU = {
     'company_fax': 'Факс компании',
     'company_email': 'Электронный адрес компании',
     'company_website': 'Веб-сайт компании',
+    'company_description': 'Описание Компании',
     'input_company_name': 'Введите название компании',
     'input_company_phone': 'Введите телефон компании',
     'input_company_fax': 'Введите факс компании',
     'input_company_email': 'Введите адрес электронной почты компании',
     'input_company_website': 'Введите веб-сайт компании',
+    'input_company_description': 'Введите описание компании',
+
+    'countries': 'Страны',
+    'towns': 'Города',
+    'areas': 'Места',
+    'addresses': 'Адреса',
+    'address': 'Адрес',
+    'country': 'Страна',
+    'town': 'Город',
+    'area': 'Область',
+    'district': 'Округ',
+    'status': 'Статус',
 }
 
 export default RU

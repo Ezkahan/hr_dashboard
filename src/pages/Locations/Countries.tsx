@@ -8,7 +8,7 @@ import { NavLink } from "react-router-dom"
 import MiniLoader from "../../components/Loader/MiniLoader"
 import { IoLocationOutline, IoArrowForwardCircleOutline } from "react-icons/io5"
 
-const Locations: React.FC = () => {
+const Countries: React.FC = () => {
     const {t} = useTranslation()
     const [page, setPage] = useState(1)
 
@@ -34,7 +34,7 @@ const Locations: React.FC = () => {
             <section className="xl:p-5 p-1">
             <Header>
                 <h1 className="text-lg font-bold">
-                    {t('locations')}
+                    {t('countries')}
                 </h1>
             </Header>
 
@@ -99,7 +99,7 @@ const Locations: React.FC = () => {
                     </div>
 
                     <div className="ml-5">
-                        <NavLink to="/country/create" className="border border-indigo-500 hover:bg-indigo-600 text-indigo-600 hover:text-white duration-300 px-4 py-2 rounded-lg">
+                        <NavLink to="/country/add" className="border border-indigo-500 hover:bg-indigo-600 text-indigo-600 hover:text-white duration-300 px-4 py-2 rounded-lg">
                             {t('add')}
                         </NavLink>
                     </div>
@@ -162,4 +162,4 @@ const Locations: React.FC = () => {
     )
 }
 
-export default Locations
+export default Countries
