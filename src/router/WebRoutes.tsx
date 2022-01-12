@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import Login from '../pages/Auth/Login'
 import Companies from '../pages/Companies/Companies'
 import CreateCompany from '../pages/Companies/CreateCompany'
+import EditCompany from '../pages/Companies/EditCompany'
 import Chat from '../pages/Dashboard/Chat'
 import Dashboard from '../pages/Dashboard/Dashboard'
 import Educations from '../pages/Educations/Educations'
@@ -24,6 +25,7 @@ const WebRoutes = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/companies" element={<Companies />} />
             <Route path="/company/create" element={<CreateCompany />} />
+            <Route path="/company/:id/edit" element={<EditCompany />} />
             <Route path="/vacancies" element={<Vacancies />} />
             <Route path="/people" element={<People />} />
             <Route path="/educations" element={<Educations />} />

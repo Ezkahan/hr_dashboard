@@ -37,8 +37,12 @@ const EN = {
     'no': 'No',
     'empty_list': 'Empty list',
     'cancel': 'Cancel',
+    'options': 'Options',
+    'error_not_loaded': 'Error not loaded',
+    'error_not_saved': 'Error not saved',
 
     'new_company': 'New company',
+    'edit_company': 'Edit company',
     'company_name': 'Company name',
     'company_phone': 'Company phone',
     'company_fax': 'Company fax',

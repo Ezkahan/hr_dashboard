@@ -1,16 +1,30 @@
 import Header from "../../components/Header/Header"
 import AppLayout from "../../layouts/AppLayout"
 import { useTranslation } from "react-i18next"
+import React, { useState } from "react"
+import { useMutation } from '@apollo/client'
+import { NavLink, Navigate } from "react-router-dom"
+import toast from 'react-hot-toast'
 
 import RU_FLAG from '../../assets/icons/locales/ru.jpg'
 import EN_FLAG from '../../assets/icons/locales/en.jpg'
-import React, { useState } from "react"
-import {gql, useMutation} from '@apollo/client'
-import { NavLink } from "react-router-dom"
+import { ICompanyCreate } from "../../common/interfaces/Company/ICompanyCreate"
+import { CREATE_COMPANY } from "../../graphql/mutations/Company/createCompanyMutation"
+import { _GET_COMPANIES } from "../../graphql/queries/Company/getCompaniesQuery"
 
 const CreateCompany: React.FC = () => {
     const { t } = useTranslation()
-    const [company, setCompany] = useState([])
+    const [company, setCompany] = useState<ICompanyCreate>({
+        name_ru: "",
+        name_en: "",
+        phone: "",
+        fax: "",
+        email: "",
+        website: "",
+        description_ru: "",
+        description_en: "",
+        company_type_id: 1
+    })
 
     const changeHandler = (e: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => {
         setCompany({
@@ -19,24 +33,35 @@ const CreateCompany: React.FC = () => {
         })
     }
 
-    const CREATE_COMPANY = gql`
-            mutation CreateCompany($name_ru: String!, $name_en: String!, $company_type_id: ID! = 1) {
-                createCompany(name_ru: $name_ru, name_en: $name_en, company_type_id: $company_type_id) {
-                    id
-                    name
-                }
-            }
-        `
+    const onCompleted = () => {
+        return <Navigate to="/companies" />
+    }
 
-    const [createCompany, { data, loading, error }] = useMutation(CREATE_COMPANY);
+    const [createCompany] = useMutation(CREATE_COMPANY, {
+        onCompleted,
+        onError: () => toast.error(t('error_not_saved'), {duration: 2000}),
+        refetchQueries: [
+            {
+                query: _GET_COMPANIES,
+                variables: { page: 1 }
+            }
+        ]
+    });
 
     const onSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault()
 
         createCompany({
             variables: {
-                name_ru: company,
-              },
+                name_ru: company.name_ru,
+                name_en: company.name_en,
+                phone: company.phone,
+                fax: company.fax,
+                email: company.email,
+                website: company.website,
+                description_ru: company.description_ru,
+                description_en: company.description_en,
+            }
         })
     }
 
@@ -52,19 +77,7 @@ const CreateCompany: React.FC = () => {
                     </div>
                 </Header>
 
-                {
-                    loading && "Loading"
-                }
-
-                {
-                    data && console.log(data)
-                }
-
-                {
-                    error && console.log(error)
-                }
-
-                <main className="bg-white xl:px-8 px-5 xl:py-6 py-4 xl:my-5 my-3 rounded-lg">
+                <form onSubmit={(e) => onSubmit(e)} className="bg-white xl:px-8 px-5 xl:py-6 py-4 xl:my-5 my-3 rounded-lg">
                     <h1 className="text-lg font-montserrat-bold">
                         {t('new_company')}
                     </h1>
@@ -75,7 +88,7 @@ const CreateCompany: React.FC = () => {
                                 <small className="px-4 pt-2">{t('company_name')}</small>
                                 <img src={RU_FLAG} alt="RU" className="w-6 h-4 mr-4 mt-2" />
                             </header>
-                            <input name="name_ru" onChange={(e) => changeHandler(e)} type="text" className="bg-slate-50 px-4 py-2" placeholder={t('input_company_name')} />
+                            <input required name="name_ru" onChange={(e) => changeHandler(e)} type="text" className="bg-slate-50 px-4 py-2" placeholder={t('input_company_name')} />
                         </div>
 
                         <div className="col-span-12 xl:col-span-6 bg-slate-50 border border-slate-200 rounded-lg flex flex-col w-full overflow-hidden">
@@ -83,7 +96,7 @@ const CreateCompany: React.FC = () => {
                                 <small className="px-4 pt-2">{t('company_name')}</small>
                                 <img src={EN_FLAG} alt="EN" className="w-6 h-4 mr-4 mt-2" />
                             </header>
-                            <input name="name_en" onChange={(e) => changeHandler(e)} type="text" className="bg-slate-50 px-4 py-2" placeholder={t('input_company_name')} />
+                            <input required name="name_en" onChange={(e) => changeHandler(e)} type="text" className="bg-slate-50 px-4 py-2" placeholder={t('input_company_name')} />
                         </div>
                     </aside>
 
@@ -135,7 +148,7 @@ const CreateCompany: React.FC = () => {
                     <NavLink to="/companies" className="bg-slate-100 hover:bg-slate-200 text-slate-600 border border-slate-200 font-montserrat-bold px-6 py-3 duration-300 rounded-lg ml-10">
                         {t('cancel')}
                     </NavLink>
-                </main>
+                </form>
             </section>
         </AppLayout>
     )

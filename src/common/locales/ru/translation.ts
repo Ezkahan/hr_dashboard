@@ -37,8 +37,13 @@ const RU = {
     'no': 'Нет',
     'empty_list': 'Список пуст',
     'cancel': 'Отмена',
+    'options': 'Опции',
+    'error_not_loaded': 'Ошибка не загружена',
+    'error_not_saved': 'Ошибка не сохранена',
+
 
     'new_company': 'Новая компания',
+    'edit_company': 'Изменить компанию',
     'company_name': 'Название компании',
     'company_phone': 'Телефон компании',
     'company_fax': 'Факс компании',

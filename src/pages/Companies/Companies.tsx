@@ -5,36 +5,26 @@ import { useTranslation } from "react-i18next"
 import { useState } from 'react'
 import ReactPaginate from 'react-paginate'
 import MiniLoader from '../../components/Loader/MiniLoader'
-import Error from '../../components/Error/Error'
 import { NavLink } from 'react-router-dom'
+import { _GET_COMPANIES } from '../../graphql/queries/Company/getCompaniesQuery'
+import { IoPencilOutline, IoTrashOutline } from 'react-icons/io5'
+import toast from 'react-hot-toast'
+import Modal from '../../components/Modal/Modal'
+import { ICompanyList } from '../../common/interfaces/Company/ICompanyList'
 
 const Companies: React.FC = () => {
     const { t } = useTranslation()
     const [page, setPage] = useState(1)
+    const [deleteModal, setDeleteModal] = useState<boolean>(false)
 
-    const _COMPANIES = gql`
-        query GetCompanies {
-            companies(first: 30, page: ${page}, orderBy: [{column: ID, order: DESC}])
-            {
-                data {
-                    id
-                    name
-                }
-                paginatorInfo {
-                    count
-                    currentPage
-                    firstItem
-                    lastItem
-                    lastPage
-                    perPage
-                    total
-                    hasMorePages
-                }
-            }
-        }
-    `;
+    const {loading, data} = useQuery(_GET_COMPANIES, {
+        variables: {page},
+        onError: () => toast.error(t('error_not_loaded'), {duration: 2000})
+    })
 
-    const {loading, error, data} = useQuery(_COMPANIES)
+    const toggleDeleteModal = () => {
+        setDeleteModal(!deleteModal)
+    }
 
     return (
         <AppLayout>
@@ -44,6 +34,10 @@ const Companies: React.FC = () => {
                     {t('companies')}
                 </h1>
             </Header>
+
+            <Modal isOpen={deleteModal} close={toggleDeleteModal}>
+                <h1> Delete modal </h1>
+            </Modal>
 
             <main className="bg-white xl:px-8 px-6 xl:py-6 py-4 mb-5 rounded-lg">
                 <header className=" flex justify-between items-center py-3 mb-5">
@@ -63,10 +57,6 @@ const Companies: React.FC = () => {
                 }
 
                 {
-                    error && error.message
-                }
-
-                {
                     data && data.companies.data &&
 
                     <section className="overflow-x-auto">
@@ -77,12 +67,13 @@ const Companies: React.FC = () => {
                                     <th className="px-4 py-3 w-96">{t('name')}</th>
                                     <th className="px-4 py-3">{t('description')}</th>
                                     <th className="px-4 py-3">{t('phone')}</th>
-                                    <th className="px-4 py-3 rounded-tr-lg rounded-br-lg">{t('email')}</th>
+                                    <th className="px-4 py-3">{t('email')}</th>
+                                    <th className="px-4 py-3 rounded-tr-lg rounded-br-lg">{t('options')}</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
-                                    data.companies.data.map((company: any, index: number) => {
+                                    data.companies.data.map((company: ICompanyList, index: number) => {
                                         return (
                                             <tr key={index} className="border-b border-stone-100 text-indigo-900/80">
                                                 <td className="border-r border-stone-100 px-4 py-3 text-xs">{company.id}</td>
@@ -99,6 +90,21 @@ const Companies: React.FC = () => {
 
                                                 <td className="px-4 py-3">
                                                     <p>{company.email}</p>
+                                                </td>
+
+                                                <td className="px-4 py-3">
+                                                    <div className="flex">
+                                                        <NavLink to={`/company/${company.id}/edit`} className="border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white duration-300 w-8 h-8 mx-1 flex items-center justify-center rounded-full">
+                                                            <IoPencilOutline size={18} />
+                                                        </NavLink>
+
+                                                        <button
+                                                            onClick={() => toggleDeleteModal()}
+                                                            className="border border-red-500 text-red-500 hover:bg-red-500 hover:text-white duration-300 w-8 h-8 mx-1 flex items-center justify-center rounded-full"
+                                                        >
+                                                            <IoTrashOutline size={18} />
+                                                        </button>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         )

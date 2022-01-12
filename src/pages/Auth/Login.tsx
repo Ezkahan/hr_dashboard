@@ -1,43 +1,24 @@
-import { Formik, Field, Form, FormikHelpers } from 'formik';
-import { useTranslation } from 'react-i18next';
-import { IoKeyOutline, IoPersonOutline } from "react-icons/io5";
-import { gql, useMutation } from '@apollo/client'
+import { Formik, Field, Form, FormikHelpers } from 'formik'
+import { useTranslation } from 'react-i18next'
+import { IoKeyOutline, IoPersonOutline } from "react-icons/io5"
+import { useMutation } from '@apollo/client'
+import { _LOGIN } from '../../graphql/mutations/Auth/LoginMutation'
+import { ILogin } from '../../common/interfaces/User/ILogin'
+import { setUserData } from '../../common/helpers/User/setUserData'
+import { Navigate } from 'react-router-dom'
 
-interface ILogin {
-    email: string;
-    password: string;
-}
-
-interface IUserData {
-    id: number;
-    name: string;
-    email: string;
-    token: string;
-}
 
 const Login: React.FC = () => {
     const {t} = useTranslation()
-
-    const _LOGIN = gql`
-        mutation Login($email: String!, $password: String!) {
-            login(email: $email, password: $password) {
-                id
-                name
-                email
-                token
-            }
-        }
-    `
-
-    const setUserData = (data: IUserData) => {
-        localStorage.setItem('orlan_token', data.token);
-    }
-
-    const [login, {data, loading, error}] = useMutation(_LOGIN)
+    const token = localStorage.getItem('orlan_token');
+    
+    const [login, {data}] = useMutation(_LOGIN)
 
     return (
-            <section className="flex items-center justify-center h-screen bg-slate-50 font-montserrat-medium">
-                
+        <section className="flex items-center justify-center h-screen bg-slate-50 font-montserrat-medium">
+            {
+                token ? <Navigate to="/" /> : ""
+            }
             <Formik
                 initialValues={{
                     email: '',
@@ -51,11 +32,9 @@ const Login: React.FC = () => {
                 }}
             >
                 <Form className="flex flex-col bg-white w-96 rounded-xl shadow-lg shadow-slate-200 px-10 py-16">
-
                     {
                         data && data.login && setUserData(data.login)
                     }
-
                     <div className="flex items-center group-focus:border-slate-600 border border-slate-200/50 rounded-xl overflow-hidden mb-5">
                         <label htmlFor="email" className="text-slate-500 pl-4 pr-1.5">
                             <IoPersonOutline size={20} />
@@ -88,7 +67,7 @@ const Login: React.FC = () => {
                     </button>
                 </Form>
             </Formik>
-            </section>
+        </section>
     )
 }
 
