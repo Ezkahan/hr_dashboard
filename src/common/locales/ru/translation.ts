@@ -40,6 +40,11 @@ const RU = {
     'options': 'Опции',
     'error_not_loaded': 'Ошибка не загружена',
     'error_not_saved': 'Ошибка не сохранена',
+    'confirm_delete': 'Потдвердите удаление',
+    'yes_delete': 'Да, удалить',
+    'no_cancel': 'Нет, отмена',
+    'success_deleted' : 'Успешно удалено',
+    'error_not_deleted' : 'Ошибка. Не удалена',
 
 
     'new_company': 'Новая компания',

@@ -17,7 +17,7 @@ const Modal: React.FC<IModal> = ({isOpen, children, close}) => {
               animate={{ translateY: 0, opacity: 1 }}
               exit={{ translateY: '-100%', opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="bg-white w-96 lg:w-4/12 z-50 rounded-3xl overflow-x-hidden"
+              className="bg-white w-96 lg:w-4/12 z-50 rounded-lg overflow-x-hidden"
             >
               <div className="bg-white p-5">
                 {children}

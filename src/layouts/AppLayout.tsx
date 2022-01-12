@@ -5,7 +5,6 @@ import Sidebar from '../components/Navigation/Sidebar'
 import { Toaster } from "react-hot-toast"
 import ReactTooltip from "react-tooltip"
 
-
 const AppLayout = ({children}: IChildren) => {
     const token = localStorage.getItem('orlan_token');
 

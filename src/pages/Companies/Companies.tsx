@@ -1,4 +1,4 @@
-import { gql, useQuery } from '@apollo/client'
+import { useQuery } from '@apollo/client'
 import Header from "../../components/Header/Header"
 import AppLayout from "../../layouts/AppLayout"
 import { useTranslation } from "react-i18next"
@@ -11,19 +11,24 @@ import { IoPencilOutline, IoTrashOutline } from 'react-icons/io5'
 import toast from 'react-hot-toast'
 import Modal from '../../components/Modal/Modal'
 import { ICompanyList } from '../../common/interfaces/Company/ICompanyList'
+import DeleteCompany from './DeleteCompany'
+import { IDeleteCompanyModal } from '../../common/interfaces/Company/IDeleteCompany'
 
 const Companies: React.FC = () => {
     const { t } = useTranslation()
     const [page, setPage] = useState(1)
-    const [deleteModal, setDeleteModal] = useState<boolean>(false)
+    const [companyDelete, setCompanyDelete] = useState<IDeleteCompanyModal>({
+        id: null,
+        delete: false
+    })
 
     const {loading, data} = useQuery(_GET_COMPANIES, {
         variables: {page},
         onError: () => toast.error(t('error_not_loaded'), {duration: 2000})
     })
 
-    const toggleDeleteModal = () => {
-        setDeleteModal(!deleteModal)
+    const toggleDeleteModal = (id: number | null = null) => {
+        setCompanyDelete({delete: !companyDelete.delete, id})
     }
 
     return (
@@ -35,8 +40,8 @@ const Companies: React.FC = () => {
                 </h1>
             </Header>
 
-            <Modal isOpen={deleteModal} close={toggleDeleteModal}>
-                <h1> Delete modal </h1>
+            <Modal isOpen={companyDelete.delete} close={toggleDeleteModal}>
+                <DeleteCompany id={companyDelete.id} />
             </Modal>
 
             <main className="bg-white xl:px-8 px-6 xl:py-6 py-4 mb-5 rounded-lg">
@@ -99,7 +104,7 @@ const Companies: React.FC = () => {
                                                         </NavLink>
 
                                                         <button
-                                                            onClick={() => toggleDeleteModal()}
+                                                            onClick={() => toggleDeleteModal(company.id)}
                                                             className="border border-red-500 text-red-500 hover:bg-red-500 hover:text-white duration-300 w-8 h-8 mx-1 flex items-center justify-center rounded-full"
                                                         >
                                                             <IoTrashOutline size={18} />

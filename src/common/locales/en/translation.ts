@@ -40,6 +40,12 @@ const EN = {
     'options': 'Options',
     'error_not_loaded': 'Error not loaded',
     'error_not_saved': 'Error not saved',
+    'confirm_delete': 'Confirm delete',
+    'yes_delete': 'Yes, delete',
+    'no_cancel': 'No, cancel',
+    'success_deleted' : 'Successfuly deleted',
+    'error_not_deleted' : 'Error not deleted',
+
 
     'new_company': 'New company',
     'edit_company': 'Edit company',

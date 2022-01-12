@@ -1,4 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion'
+
 import Login from '../pages/Auth/Login'
 import Companies from '../pages/Companies/Companies'
 import CreateCompany from '../pages/Companies/CreateCompany'
@@ -20,6 +22,7 @@ import Vacancies from '../pages/Vacancies/Vacancies'
 
 const WebRoutes = () => {
     return (
+        <AnimatePresence exitBeforeEnter>
         <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/login" element={<Login />} />
@@ -40,6 +43,7 @@ const WebRoutes = () => {
             <Route path="/settings" element={<Settings />} />
             <Route path="/chats" element={<Chat />} />
         </Routes>
+        </AnimatePresence>
     )
 }
 
