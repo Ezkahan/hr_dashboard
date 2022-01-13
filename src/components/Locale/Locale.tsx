@@ -6,7 +6,7 @@ import changeLocale from '../../common/locales/changeLocale'
 
 const Locale = () => {
   const [select, setSelect] = useState(false);
-  const locale = localStorage.getItem('locale') ?? 'ru'
+  const locale = localStorage.getItem('orlan_locale') ?? 'ru'
   const locales = {
     ru: RU_FLAG,
     en: EN_FLAG
@@ -20,8 +20,9 @@ const Locale = () => {
   return (
     <aside className="flex items-center">
       <div className="uppercase font-bold w-8 ml-4" onClick={() => setSelect(!select)}>
-          {locale}
-        {/* <img className="w-8" src={locales.locale} alt="Locale" /> */}
+        {
+          locale === 'ru' ? <img className="w-8" src={locales.ru} alt={locale} /> : <img className="w-8" src={locales.en} alt={locale} />
+        }
       </div>
         {select && (
           <main className="bg-white absolute top-16 right-4 rounded-xl shadow">

@@ -1,5 +1,5 @@
 export interface IModal {
-    isOpen: boolean,
+    isOpen?: boolean,
     children?: React.ReactChild | React.ReactChildren | JSX.Element
     close: () => void
 }

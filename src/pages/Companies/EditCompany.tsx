@@ -3,18 +3,21 @@ import AppLayout from "../../layouts/AppLayout"
 import { useTranslation } from "react-i18next"
 import React, { useState } from "react"
 import { useMutation, useQuery } from '@apollo/client'
-import { NavLink, Navigate, useParams } from "react-router-dom"
+import { NavLink, useNavigate, useParams } from "react-router-dom"
 import toast from 'react-hot-toast'
+import getByLocale from "../../common/helpers/getByLocale"
 
 import RU_FLAG from '../../assets/icons/locales/ru.jpg'
 import EN_FLAG from '../../assets/icons/locales/en.jpg'
 import { ICompanyCreate } from "../../common/interfaces/Company/ICompanyCreate"
-import { CREATE_COMPANY } from "../../graphql/mutations/Company/createCompanyMutation"
-import { _GET_COMPANIES } from "../../graphql/queries/Company/getCompaniesQuery"
-import { _GET_COMPANY } from "../../graphql/queries/Company/getCompanyQuery"
+import { GET_COMPANIES } from "../../graphql/queries/Company/getCompaniesQuery"
+import { GET_COMPANY } from "../../graphql/queries/Company/getCompanyQuery"
+import { UPDATE_COMPANY } from "../../graphql/mutations/Company/updateCompanyMutation"
+import MiniLoader from "../../components/Loader/MiniLoader"
 
 const EditCompany: React.FC = () => {
     const { t } = useTranslation()
+    const navigate = useNavigate()
     const { id } = useParams()
 
     const [company, setCompany] = useState<ICompanyCreate>({
@@ -36,21 +39,37 @@ const EditCompany: React.FC = () => {
         })
     }
 
-    const onCompleted = () => {
-        return <Navigate to="/companies" />
+    const setCompanyData = (data: any) => {
+        setCompany({
+            ...company,
+            name_ru: data.company.name.ru,
+            name_en: data.company.name.en,
+            phone: data.company.phone,
+            fax: data.company.fax,
+            email: data.company.email,
+            website: data.company.website,
+            description_ru: data.company.description.ru,
+            description_en: data.company.description.en,
+        })
+        // console.log(company.description_ru)
     }
 
-    const {loading, data} = useQuery(_GET_COMPANY, {
+    const onCompleted = () => {
+        toast.success(t('success_saved'), {duration: 1500}) && setTimeout(() => navigate('/companies'), 2000)
+    }
+
+    const {loading, data} = useQuery(GET_COMPANY, {
         variables: {id: id},
+        onCompleted: (data) => setCompanyData(data),
         onError: () => toast.error(t('error_not_loaded'), {duration: 2000})
     })
 
-    const [updateCompany] = useMutation(CREATE_COMPANY, {
+    const [updateCompany] = useMutation(UPDATE_COMPANY, {
         onCompleted,
         onError: () => toast.error(t('error_not_saved'), {duration: 2000}),
         refetchQueries: [
             {
-                query: _GET_COMPANIES,
+                query: GET_COMPANIES,
                 variables: { page: 1 }
             }
         ]
@@ -61,14 +80,15 @@ const EditCompany: React.FC = () => {
 
         updateCompany({
             variables: {
-                name_ru: company.name_ru,
-                name_en: company.name_en,
-                phone: company.phone,
-                fax: company.fax,
-                email: company.email,
-                website: company.website,
-                description_ru: company.description_ru,
-                description_en: company.description_en,
+                id: id,
+                name_ru: company.name_ru ?? data.company.name.ru,
+                name_en: company.name_en ?? data.company.name.en,
+                phone: company.phone ?? data.company.phone,
+                fax: company.fax ?? data.company.fax,
+                email: company.email ?? data.company.email,
+                website: company.website ?? data.company.website,
+                description_ru: company.description_ru ?? data.company.description_ru,
+                description_en: company.description_en ?? data.company.description_en,
             }
         })
     }
@@ -86,10 +106,14 @@ const EditCompany: React.FC = () => {
                 </Header>
 
                 {
+                    loading && <MiniLoader />
+                }
+
+                {
                     data && data.company &&
                     <form onSubmit={(e) => onSubmit(e)} className="bg-white xl:px-8 px-5 xl:py-6 py-4 xl:my-5 my-3 rounded-lg">
                         <h1 className="text-lg font-montserrat-bold">
-                            { data.company.name ? data.company.name : t('edit_company')}
+                            { data.company.name ? getByLocale(data.company.name) : t('edit_company')}
                         </h1>
 
                         <aside className="grid grid-cols-12 gap-5 mt-5 mb-8">
@@ -105,7 +129,7 @@ const EditCompany: React.FC = () => {
                                     type="text"
                                     className="bg-slate-50 px-4 py-2"
                                     placeholder={t('input_company_name')}
-                                    value={data.company.name}
+                                    value={company && company.name_ru}
                                 />
                             </div>
 
@@ -121,7 +145,7 @@ const EditCompany: React.FC = () => {
                                     type="text"
                                     className="bg-slate-50 px-4 py-2"
                                     placeholder={t('input_company_name')}
-                                    value={data.company.name}
+                                    value={company && company.name_en}
                                 />
                             </div>
                         </aside>
@@ -135,7 +159,7 @@ const EditCompany: React.FC = () => {
                                 type="text"
                                 className="bg-slate-50 px-4 py-2"
                                 placeholder={t('input_company_phone')}
-                                value={data.company.phone}
+                                value={company && company.phone}
                             />
                             </div>
 
@@ -147,7 +171,7 @@ const EditCompany: React.FC = () => {
                                 type="text"
                                 className="bg-slate-50 px-4 py-2"
                                 placeholder={t('input_company_fax')}
-                                value={data.company.fax}
+                                value={company && company.fax}
                             />
                             </div>
                         </aside>
@@ -161,7 +185,7 @@ const EditCompany: React.FC = () => {
                                     type="text"
                                     className="bg-slate-50 px-4 py-2"
                                     placeholder={t('input_company_email')}
-                                    value={data.company.email}
+                                    value={company && company.email}
                                 />
                             </div>
 
@@ -173,7 +197,7 @@ const EditCompany: React.FC = () => {
                                     type="text"
                                     className="bg-slate-50 px-4 py-2"
                                     placeholder={t('input_company_website')}
-                                    value={data.company.website}
+                                    value={company && company.website}
                                 />
                             </div>
                         </aside>
@@ -189,7 +213,8 @@ const EditCompany: React.FC = () => {
                                     onChange={(e) => changeHandler(e)}
                                     className="bg-slate-50 h-60 px-4 py-2"
                                     placeholder={t('input_company_description')}
-                                >{data.company.description}</textarea>
+                                    value={company && company.description_ru}
+                                ></textarea>
                             </div>
 
                             <div className="col-span-12 xl:col-span-6 bg-slate-50 border border-slate-200 rounded-lg flex flex-col w-full overflow-hidden">
@@ -202,7 +227,8 @@ const EditCompany: React.FC = () => {
                                     onChange={(e) => changeHandler(e)}
                                     className="bg-slate-50 h-60 px-4 py-2"
                                     placeholder={t('input_company_description')}
-                                >{data.company.description}</textarea>
+                                    value={company && company.description_en}
+                                ></textarea>
                             </div>
                         </aside>
 

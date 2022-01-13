@@ -1,7 +1,8 @@
 import { gql } from '@apollo/client'
 
-export const CREATE_COMPANY = gql`
-    mutation CreateCompany(
+export const UPDATE_COMPANY = gql`
+    mutation UpdateCompany(
+        $id: ID!
         $name_ru: String!,
         $name_en: String!,
         $phone: String,
@@ -12,7 +13,8 @@ export const CREATE_COMPANY = gql`
         $description_en: String,
         $company_type_id: ID! = 1
     ) {
-        createCompany(
+        updateCompany(
+            id: $id
             name_ru: $name_ru,
             name_en: $name_en,
             phone: $phone,

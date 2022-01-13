@@ -37,9 +37,11 @@ const RU = {
     'no': 'Нет',
     'empty_list': 'Список пуст',
     'cancel': 'Отмена',
+    'close': 'Закрыть',
     'options': 'Опции',
     'error_not_loaded': 'Ошибка не загружена',
     'error_not_saved': 'Ошибка не сохранена',
+    'success_saved' : 'Успешно сохранено',
     'confirm_delete': 'Потдвердите удаление',
     'yes_delete': 'Да, удалить',
     'no_cancel': 'Нет, отмена',
@@ -72,6 +74,11 @@ const RU = {
     'area': 'Область',
     'district': 'Округ',
     'status': 'Статус',
+
+
+    'add_new_country': 'Добавить новую страну',
+    'country_name': 'Название страны',
+    'input_country_name': 'Введите название страны',
 }
 
 export default RU

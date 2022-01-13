@@ -37,9 +37,11 @@ const EN = {
     'no': 'No',
     'empty_list': 'Empty list',
     'cancel': 'Cancel',
+    'close': 'Close',
     'options': 'Options',
     'error_not_loaded': 'Error not loaded',
     'error_not_saved': 'Error not saved',
+    'success_saved' : 'Successfuly saved',
     'confirm_delete': 'Confirm delete',
     'yes_delete': 'Yes, delete',
     'no_cancel': 'No, cancel',
@@ -72,6 +74,11 @@ const EN = {
     'area': 'Area',
     'district': 'District',
     'status': 'Status',
+
+    
+    'add_new_country': 'Add new country',
+    'country_name': 'Country name',
+    'input_country_name': 'Input country name',
 
 }
 

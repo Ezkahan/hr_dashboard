@@ -1,13 +1,19 @@
 import { gql } from '@apollo/client'
 
-export const _GET_COMPANIES = gql`
+export const GET_COMPANIES = gql`
 query GetCompanies($page: Int) {
     companies(first: 30, page: $page, orderBy: [{column: ID, order: DESC}])
     {
         data {
             id
-            name
-            description
+            name {
+                ru
+                en
+            }
+            description {
+                ru
+                en
+            }
             phone
             email
         }

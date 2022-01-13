@@ -1,36 +1,60 @@
 import { useTranslation } from "react-i18next"
-import Header from "../../components/Header/Header"
-import AppLayout from "../../layouts/AppLayout"
+import Header from "../../../components/Header/Header"
+import AppLayout from "../../../layouts/AppLayout"
 import { useQuery } from '@apollo/client'
 import { useState } from "react"
 import ReactPaginate from 'react-paginate'
-import { NavLink } from "react-router-dom"
-import MiniLoader from "../../components/Loader/MiniLoader"
+import MiniLoader from "../../../components/Loader/MiniLoader"
 import { IoPencilOutline, IoTrashOutline } from "react-icons/io5"
-import LocationNav from "./LocationNav"
 import toast from "react-hot-toast"
-import getByLocale from "../../common/helpers/getByLocale"
-import { COUNTRIES } from "../../graphql/queries/Location/Country/getCountriesQuery"
+import LocationNav from "../LocationNav"
+import { COUNTRIES } from "../../../graphql/queries/Location/Country/getCountriesQuery"
+import getByLocale from "../../../common/helpers/getByLocale"
+import Modal from '../../../components/Modal/Modal'
+import AddCountry from "./AddCountry"
+import { IDeleteModal } from "../../../common/interfaces/IDeleteModal"
+import DeleteCountry from "./DeleteCountry"
 
-const Locations: React.FC = () => {
+const Countries: React.FC = () => {
     const {t} = useTranslation()
-    const [page, setPage] = useState(1)
+    const [page, setPage] = useState<number>(1)
+    const [addModal, setAddModal] = useState<boolean>(false)
+    const [deleteModal, setDeleteModal] = useState<IDeleteModal>({
+        id: null,
+        delete: false
+    })
 
     const {loading, data} = useQuery(COUNTRIES, {
         variables: {page},
         onError: () => toast.error(t('error_not_loaded'), {duration: 2000})
     })
 
+    const toggleAddModal = () => {
+        setAddModal(!addModal)
+    }
+
+    const toggleDeleteModal = (id: number | null = null) => {
+        setDeleteModal({delete: !deleteModal.delete, id})
+    }
+
     return (
         <AppLayout>
             <section className="xl:p-5 p-1">
             <Header>
                 <h1 className="text-lg font-bold">
-                    {t('locations')}
+                    {t('countries')}
                 </h1>
             </Header>
 
             <LocationNav />
+
+            <Modal isOpen={addModal} close={toggleAddModal}>
+                <AddCountry close={toggleAddModal} />
+            </Modal>
+
+            <Modal isOpen={deleteModal.delete} close={toggleDeleteModal}>
+                <DeleteCountry id={deleteModal.id} close={toggleDeleteModal} />
+            </Modal>
 
             <main className="bg-white xl:px-8 px-6 xl:py-6 py-4 mb-5 rounded-lg">
                 <header className=" flex justify-between items-center py-3 mb-5">
@@ -39,9 +63,9 @@ const Locations: React.FC = () => {
                     </div>
 
                     <div className="ml-5">
-                        <NavLink to="/country/create" className="border border-indigo-500 hover:bg-indigo-600 text-indigo-600 hover:text-white duration-300 px-4 py-2 rounded-lg">
+                        <button onClick={() => toggleAddModal()} className="border border-indigo-500 hover:bg-indigo-600 text-indigo-600 hover:text-white duration-300 px-4 py-2 rounded-lg">
                             {t('add')}
-                        </NavLink>
+                        </button>
                     </div>
                 </header>
 
@@ -78,7 +102,7 @@ const Locations: React.FC = () => {
                                                         </button>
 
                                                         <button
-                                                            // onClick={() => toggleDeleteModal(company.id)}
+                                                            onClick={() => toggleDeleteModal(country.id)}
                                                             className="border border-red-500 text-red-500 hover:bg-red-500 hover:text-white duration-300 w-8 h-8 mx-1 flex items-center justify-center rounded-full"
                                                         >
                                                             <IoTrashOutline size={18} />
@@ -117,4 +141,4 @@ const Locations: React.FC = () => {
     )
 }
 
-export default Locations
+export default Countries

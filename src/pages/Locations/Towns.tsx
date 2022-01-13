@@ -6,7 +6,8 @@ import { useState } from "react"
 import ReactPaginate from 'react-paginate'
 import { NavLink } from "react-router-dom"
 import MiniLoader from "../../components/Loader/MiniLoader"
-import { IoLocationOutline, IoArrowForwardCircleOutline } from "react-icons/io5"
+import { IoLocationOutline, IoArrowForwardCircleOutline, IoEyeOutline, IoPencilOutline, IoTrashOutline } from "react-icons/io5"
+import LocationNav from "./LocationNav"
 
 const Towns: React.FC = () => {
     const {t} = useTranslation()
@@ -30,7 +31,7 @@ const Towns: React.FC = () => {
         }
     `;
 
-    const {loading, error, data} = useQuery(_TOWNS)
+    const {loading, data} = useQuery(_TOWNS)
 
     return (
         <AppLayout>
@@ -41,59 +42,7 @@ const Towns: React.FC = () => {
                 </h1>
             </Header>
 
-            <section className="grid grid-cols-12 gap-5 mb-5">
-                <NavLink to="/countries" className="col-span-12 xl:col-span-3 bg-white text-slate-700 flex items-center justify-between p-5 rounded-xl relative overflow-hidden group shadow-lg shadow-slate-200/50">
-                    <aside className="flex items-center">
-                        <IoLocationOutline className="text-slate-500 text-4xl group-hover:text-indigo-600 duration-300" />
-                        <div className="flex flex-col ml-3">
-                            <h1 className="text-lg font-montserrat-bold">
-                                {t('countries')}
-                            </h1>
-                            <small className="text-slate-500 text-xs"> {t('total')} </small>
-                        </div>
-                    </aside>
-                    <IoArrowForwardCircleOutline size={34} className="text-indigo-600 absolute top-7 -right-10 group-hover:right-5 duration-300" />
-                </NavLink>
-
-                <NavLink to="/towns" className="col-span-12 xl:col-span-3 bg-white text-slate-700 flex items-center justify-between p-5 rounded-xl relative overflow-hidden group shadow-lg shadow-slate-200/50">
-                    <aside className="flex items-center">
-                        <IoLocationOutline className="text-slate-500 text-4xl group-hover:text-indigo-600 duration-300" />
-                        <div className="flex flex-col ml-3">
-                            <h1 className="text-lg font-montserrat-bold">
-                                {t('towns')}
-                            </h1>
-                            <small className="text-slate-500 text-xs"> {t('total')} </small>
-                        </div>
-                    </aside>
-                    <IoArrowForwardCircleOutline size={34} className="text-indigo-600 absolute top-7 -right-10 group-hover:right-5 duration-300" />
-                </NavLink>
-
-                <NavLink to="/areas" className="col-span-12 xl:col-span-3 bg-white text-slate-700 flex items-center justify-between p-5 rounded-xl relative overflow-hidden group shadow-lg shadow-slate-200/50">
-                    <aside className="flex items-center">
-                        <IoLocationOutline className="text-slate-500 text-4xl group-hover:text-indigo-600 duration-300" />
-                        <div className="flex flex-col ml-3">
-                            <h1 className="text-lg font-montserrat-bold">
-                                {t('areas')}
-                            </h1>
-                            <small className="text-slate-500 text-xs"> {t('total')} </small>
-                        </div>
-                    </aside>
-                    <IoArrowForwardCircleOutline size={34} className="text-indigo-600 absolute top-7 -right-10 group-hover:right-5 duration-300" />
-                </NavLink>
-
-                <NavLink to="/addresses" className="col-span-12 xl:col-span-3 bg-white text-slate-700 flex items-center justify-between p-5 rounded-xl relative overflow-hidden group shadow-lg shadow-slate-200/50">
-                    <aside className="flex items-center">
-                        <IoLocationOutline className="text-slate-500 text-4xl group-hover:text-indigo-600 duration-300" />
-                        <div className="flex flex-col ml-3">
-                            <h1 className="text-lg font-montserrat-bold">
-                                {t('addresses')}
-                            </h1>
-                            <small className="text-slate-500 text-xs"> {t('total')} </small>
-                        </div>
-                    </aside>
-                    <IoArrowForwardCircleOutline size={34} className="text-indigo-600 absolute top-7 -right-10 group-hover:right-5 duration-300" />
-                </NavLink>
-            </section>
+            <LocationNav />
 
             <main className="bg-white xl:px-8 px-6 xl:py-6 py-4 mb-5 rounded-lg">
                 <header className=" flex justify-between items-center py-3 mb-5">
@@ -113,29 +62,44 @@ const Towns: React.FC = () => {
                 }
 
                 {
-                    error && error.message
-                }
-
-                {
                     data && data.towns.data &&
 
                     <section className="overflow-x-auto">
-                        <table className="w-full text-sm">
+                        <table className="w-full table-fixed text-sm">
                             <thead className="bg-slate-100 text-left text-gray-800">
                                 <tr className="border-b border-gray-100">
                                     <th className="px-4 py-3 w-20 rounded-tl-lg rounded-bl-lg">{t('id')}</th>
                                     <th className="px-4 py-3">{t('name')}</th>
+                                    <th className="px-4 py-3 w-40 rounded-tr-lg rounded-br-lg">{t('options')}</th>
                                 </tr>
                             </thead>
                             
                             <tbody>
                                 {
-                                    data && data.towns.data.map((country: any, index: number) => {
+                                    data && data.towns.data.map((town: any, index: number) => {
                                         return (
                                             <tr key={index} className="border-b border-stone-100 text-indigo-900/80">
-                                                <td className="border-r border-stone-100 px-3 py-2 text-xs">{country.id}</td>
+                                                <td className="border-r border-stone-100 px-3 py-2 text-xs">{town.id}</td>
                                                 <td className="w-96 px-3 py-2">
-                                                    <h1 className="font-bold">{country.name}</h1>
+                                                    <h1 className="font-bold">{town.name}</h1>
+                                                </td>
+                                                <td className="px-3 py-2">
+                                                    <div className="flex">
+                                                        <NavLink to={`/town/${town.id}`} className="border border-emerald-500 text-emerald-500 hover:bg-emerald-500 hover:text-white duration-300 w-8 h-8 mx-1 flex items-center justify-center rounded-full">
+                                                            <IoEyeOutline size={18} />
+                                                        </NavLink>
+
+                                                        <NavLink to={`/town/${town.id}/edit`} className="border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white duration-300 w-8 h-8 mx-1 flex items-center justify-center rounded-full">
+                                                            <IoPencilOutline size={18} />
+                                                        </NavLink>
+
+                                                        <button
+                                                            // onClick={() => toggleDeleteModal(company.id)}
+                                                            className="border border-red-500 text-red-500 hover:bg-red-500 hover:text-white duration-300 w-8 h-8 mx-1 flex items-center justify-center rounded-full"
+                                                        >
+                                                            <IoTrashOutline size={18} />
+                                                        </button>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         )
@@ -146,20 +110,24 @@ const Towns: React.FC = () => {
                     </section>
                 }
             </main>
-
-            <ReactPaginate
-                previousClassName={'hidden'}
-                nextClassName={'hidden'}
-                breakLabel={'...'}
-                breakClassName={'bg-white rounded-lg border-gray-300 text-gray-500 hover:bg-gray-50 md:inline-flex relative items-center m-1 px-4 py-2 border text-sm'}
-                pageCount={data && data.towns.paginatorInfo.lastPage}
-                marginPagesDisplayed={1}
-                pageRangeDisplayed={3}
-                onPageChange={(data) => setPage(data.selected+1)}
-                pageClassName={'bg-white page-link rounded-lg border-gray-300 text-gray-500 hover:bg-gray-50 md:inline-flex relative items-center m-1 border text-sm'}
-                containerClassName={'relative z-0 inline-flex justify-center rounded-md mb-16 w-full'}
-                activeClassName={'bg-gray-200'}
-            />
+            
+            {
+                data && data.towns.paginatorInfo.lastPage > 1 &&
+                <ReactPaginate
+                    previousClassName={'hidden'}
+                    nextClassName={'hidden'}
+                    breakLabel={'...'}
+                    breakClassName={'bg-white rounded-lg border-gray-300 text-gray-500 hover:bg-gray-50 md:inline-flex relative items-center m-1 px-4 py-2 border text-sm'}
+                    pageCount={data && data.towns.paginatorInfo.lastPage}
+                    marginPagesDisplayed={1}
+                    pageRangeDisplayed={3}
+                    onPageChange={(data) => setPage(data.selected+1)}
+                    pageClassName={'bg-white page-link rounded-lg border-gray-300 text-gray-500 hover:bg-gray-50 md:inline-flex relative items-center m-1 border text-sm'}
+                    containerClassName={'relative z-0 inline-flex justify-center rounded-md mb-16 w-full'}
+                    activeClassName={'bg-gray-200'}
+                />
+            }
+            
             </section>
         </AppLayout>
     )

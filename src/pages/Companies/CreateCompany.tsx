@@ -3,17 +3,18 @@ import AppLayout from "../../layouts/AppLayout"
 import { useTranslation } from "react-i18next"
 import React, { useState } from "react"
 import { useMutation } from '@apollo/client'
-import { NavLink, Navigate } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import toast from 'react-hot-toast'
 
 import RU_FLAG from '../../assets/icons/locales/ru.jpg'
 import EN_FLAG from '../../assets/icons/locales/en.jpg'
 import { ICompanyCreate } from "../../common/interfaces/Company/ICompanyCreate"
 import { CREATE_COMPANY } from "../../graphql/mutations/Company/createCompanyMutation"
-import { _GET_COMPANIES } from "../../graphql/queries/Company/getCompaniesQuery"
+import { GET_COMPANIES } from "../../graphql/queries/Company/getCompaniesQuery"
 
 const CreateCompany: React.FC = () => {
     const { t } = useTranslation()
+    const navigate = useNavigate()
     const [company, setCompany] = useState<ICompanyCreate>({
         name_ru: "",
         name_en: "",
@@ -34,7 +35,7 @@ const CreateCompany: React.FC = () => {
     }
 
     const onCompleted = () => {
-        return <Navigate to="/companies" />
+        toast.success(t('success_saved'), {duration: 1500}) && setTimeout(() => navigate('/companies'), 2000)
     }
 
     const [createCompany] = useMutation(CREATE_COMPANY, {
@@ -42,7 +43,7 @@ const CreateCompany: React.FC = () => {
         onError: () => toast.error(t('error_not_saved'), {duration: 2000}),
         refetchQueries: [
             {
-                query: _GET_COMPANIES,
+                query: GET_COMPANIES,
                 variables: { page: 1 }
             }
         ]

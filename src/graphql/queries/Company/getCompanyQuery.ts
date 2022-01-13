@@ -1,12 +1,18 @@
 import { gql } from '@apollo/client'
 
-export const _GET_COMPANY = gql`
+export const GET_COMPANY = gql`
 query GetCompany($id: ID) {
     company(id: $id)
         {
             id
-            name
-            description
+            name {
+                ru
+                en
+            }
+            description {
+                ru
+                en
+            }
             phone
             fax
             email

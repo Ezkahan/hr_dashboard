@@ -1,7 +1,9 @@
+import { ITranslatable } from "../ITranslatable";
+
 export interface ICompanyList {
     id: number,
-    name: string,
+    name: ITranslatable,
     phone: string,
     email: string,
-    description: string,
+    description: ITranslatable,
 }

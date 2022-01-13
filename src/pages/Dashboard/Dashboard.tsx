@@ -49,7 +49,7 @@ const Dashboard: React.FC = () => {
                         </div>
                     </aside>
                     <div className="bg-white px-6 py-4 rounded-3xl">
-                        <h3 className="font-bold text-lg">+13</h3>
+                        <h3 className="font-bold text-lg">+0</h3>
                     </div>
                 </NavLink>
 
@@ -63,7 +63,7 @@ const Dashboard: React.FC = () => {
                         </div>
                     </aside>
                     <div className="bg-white px-6 py-4 rounded-3xl">
-                        <h3 className="font-bold text-lg">+13</h3>
+                        <h3 className="font-bold text-lg">+0</h3>
                     </div>
                 </NavLink>
 
@@ -77,7 +77,7 @@ const Dashboard: React.FC = () => {
                         </div>
                     </aside>
                     <div className="bg-white px-6 py-4 rounded-3xl">
-                        <h3 className="font-bold text-lg">+13</h3>
+                        <h3 className="font-bold text-lg">+0</h3>
                     </div>
                 </NavLink>
             </main>

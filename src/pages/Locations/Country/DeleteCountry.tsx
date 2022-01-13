@@ -1,25 +1,25 @@
 import { useMutation } from "@apollo/client";
 import { useTranslation } from "react-i18next";
 import { IoTrashOutline } from "react-icons/io5";
-import { IDeleteModal } from "../../common/interfaces/IDeleteModal";
-import { DELETE_COMPANY } from "../../graphql/mutations/Company/deleteCompanyMutation";
+import { IDeleteModal } from "../../../common/interfaces/IDeleteModal";
 import toast from 'react-hot-toast'
-import { GET_COMPANIES } from "../../graphql/queries/Company/getCompaniesQuery";
-import { IModal } from "../../common/interfaces/IModal";
+import { IModal } from "../../../common/interfaces/IModal";
+import { DELETE_COUNTRY } from "../../../graphql/mutations/Location/Country/deleteCountryMutation";
+import { COUNTRIES } from "../../../graphql/queries/Location/Country/getCountriesQuery";
 
-const DeleteCompany: React.FC<IDeleteModal & IModal> = ({id, close}) => {
+const DeleteCountry: React.FC<IDeleteModal & IModal> = ({id, close}) => {
     const { t } = useTranslation()
 
     const onCompleted = () => {
         toast.success(t('success_deleted'), {duration: 1500}) && setTimeout(() => close(), 2000)
     }
 
-    const [deleteCompany] = useMutation(DELETE_COMPANY, {
+    const [deleteCoutry] = useMutation(DELETE_COUNTRY, {
         onCompleted,
         onError: () => toast.error(t('error_not_deleted'), {duration: 2000}),
         refetchQueries: [
             {
-                query: GET_COMPANIES,
+                query: COUNTRIES,
                 variables: {page: 1}
             }
         ]
@@ -34,14 +34,14 @@ const DeleteCompany: React.FC<IDeleteModal & IModal> = ({id, close}) => {
           </header>
           <footer className="flex items-center justify-center p-2">
             <button
-                onClick={() => deleteCompany({variables: {id: id}})}
+                onClick={() => deleteCoutry({variables: {id: id}})}
                 className="bg-red-400 hover:bg-red-600 duration-300 text-white px-5 py-2.5 flex items-center rounded-lg mx-3"
             >
                 <IoTrashOutline size={20} />
                 <p className="mx-2"> {t('yes_delete')} </p>
             </button>
 
-            <button className="bg-slate-100 text-gray-600 hover:bg-slate-200 hover:text-gray-800 duration-300 px-5 py-2.5 flex items-center rounded-lg mx-3">
+            <button onClick={() => close()} className="bg-slate-100 text-gray-600 hover:bg-slate-200 hover:text-gray-800 duration-300 px-5 py-2.5 flex items-center rounded-lg mx-3">
                 <p className="mx-2"> {t('no_cancel')} </p>
             </button>
           </footer>
@@ -49,4 +49,4 @@ const DeleteCompany: React.FC<IDeleteModal & IModal> = ({id, close}) => {
     );
 }
 
-export default DeleteCompany
+export default DeleteCountry

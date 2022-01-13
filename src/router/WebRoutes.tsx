@@ -5,13 +5,13 @@ import Login from '../pages/Auth/Login'
 import Companies from '../pages/Companies/Companies'
 import CreateCompany from '../pages/Companies/CreateCompany'
 import EditCompany from '../pages/Companies/EditCompany'
-import Chat from '../pages/Dashboard/Chat'
+import ShowCompany from '../pages/Companies/ShowCompany'
 import Dashboard from '../pages/Dashboard/Dashboard'
 import Educations from '../pages/Educations/Educations'
 import Employees from '../pages/Employees/Employees'
 import Addresses from '../pages/Locations/Addresses'
 import Areas from '../pages/Locations/Areas'
-import Countries from '../pages/Locations/Countries'
+import Countries from '../pages/Locations/Country/Countries'
 import Locations from '../pages/Locations/Locations'
 import Towns from '../pages/Locations/Towns'
 import People from '../pages/People/People'
@@ -19,6 +19,8 @@ import Schools from '../pages/Schools/Schools'
 import Settings from '../pages/Settings/Settings'
 import Skills from '../pages/Skills/Skills'
 import Vacancies from '../pages/Vacancies/Vacancies'
+
+import Chat from '../pages/Dashboard/Chat'
 
 const WebRoutes = () => {
     return (
@@ -29,6 +31,7 @@ const WebRoutes = () => {
             <Route path="/companies" element={<Companies />} />
             <Route path="/company/create" element={<CreateCompany />} />
             <Route path="/company/:id/edit" element={<EditCompany />} />
+            <Route path="/company/:id" element={<ShowCompany />} />
             <Route path="/vacancies" element={<Vacancies />} />
             <Route path="/people" element={<People />} />
             <Route path="/educations" element={<Educations />} />
