@@ -1,7 +1,5 @@
 import { useTranslation } from "react-i18next"
-import Header from "../../components/Header/Header"
 import AppLayout from "../../layouts/AppLayout"
-import { NavLink } from "react-router-dom"
 import EmptyList from "../../components/Message/EmptyList"
 
 const Settings: React.FC = () => {
@@ -10,11 +8,6 @@ const Settings: React.FC = () => {
     return (
         <AppLayout>
             <section className="xl:p-5 p-1">
-            <Header>
-                <h1 className="text-lg font-bold">
-                    {t('settings')}
-                </h1>
-            </Header>
                 <main className="bg-white xl:px-8 px-6 xl:py-6 py-4 mb-5 rounded-lg">
                     <EmptyList />                    
                 </main>

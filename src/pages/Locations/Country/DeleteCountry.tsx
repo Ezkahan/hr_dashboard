@@ -5,7 +5,7 @@ import { IDeleteModal } from "../../../common/interfaces/IDeleteModal";
 import toast from 'react-hot-toast'
 import { IModal } from "../../../common/interfaces/IModal";
 import { DELETE_COUNTRY } from "../../../graphql/mutations/Location/Country/deleteCountryMutation";
-import { COUNTRIES } from "../../../graphql/queries/Location/Country/getCountriesQuery";
+import { GET_COUNTRIES } from "../../../graphql/queries/Location/Country/getCountriesQuery";
 
 const DeleteCountry: React.FC<IDeleteModal & IModal> = ({id, close}) => {
     const { t } = useTranslation()
@@ -19,7 +19,7 @@ const DeleteCountry: React.FC<IDeleteModal & IModal> = ({id, close}) => {
         onError: () => toast.error(t('error_not_deleted'), {duration: 2000}),
         refetchQueries: [
             {
-                query: COUNTRIES,
+                query: GET_COUNTRIES,
                 variables: {page: 1}
             }
         ]
@@ -38,11 +38,11 @@ const DeleteCountry: React.FC<IDeleteModal & IModal> = ({id, close}) => {
                 className="bg-red-400 hover:bg-red-600 duration-300 text-white px-5 py-2.5 flex items-center rounded-lg mx-3"
             >
                 <IoTrashOutline size={20} />
-                <p className="mx-2"> {t('yes_delete')} </p>
+                <p className="mx-2"> {t('yes')} </p>
             </button>
 
             <button onClick={() => close()} className="bg-slate-100 text-gray-600 hover:bg-slate-200 hover:text-gray-800 duration-300 px-5 py-2.5 flex items-center rounded-lg mx-3">
-                <p className="mx-2"> {t('no_cancel')} </p>
+                <p className="mx-2"> {t('no')} </p>
             </button>
           </footer>
         </main>

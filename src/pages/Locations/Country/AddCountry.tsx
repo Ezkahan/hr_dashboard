@@ -7,7 +7,7 @@ import EN_FLAG from '../../../assets/icons/locales/en.jpg'
 import { useTranslation } from "react-i18next"
 import { useMutation } from "@apollo/client"
 import { ADD_COUNTRY } from "../../../graphql/mutations/Location/Country/addCountryMutation"
-import { COUNTRIES } from "../../../graphql/queries/Location/Country/getCountriesQuery"
+import { GET_COUNTRIES } from "../../../graphql/queries/Location/Country/getCountriesQuery"
 import { IAddCountry } from "../../../common/interfaces/Location/Country/IAddCountry"
 import toast from "react-hot-toast"
 
@@ -33,7 +33,7 @@ const AddCountry: React.FC<IModal> = ({close}) => {
         onError: () => {},
         refetchQueries: [
             {
-                query: COUNTRIES,
+                query: GET_COUNTRIES,
                 variables: {page: 1}
             }
         ]

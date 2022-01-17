@@ -1,4 +1,4 @@
 export interface ITranslatable {
-    ru: string
-    en: string
+    ru?: string
+    en?: string
 }

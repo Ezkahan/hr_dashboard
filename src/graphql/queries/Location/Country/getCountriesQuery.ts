@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client'
 
-export const COUNTRIES = gql`
+export const GET_COUNTRIES = gql`
 query GetCountries($page: Int) {
     countries(first: 30, page: $page, orderBy: [{column: ID, order: DESC}])
         {

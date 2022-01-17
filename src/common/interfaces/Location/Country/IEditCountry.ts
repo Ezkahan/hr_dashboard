@@ -1,5 +1,7 @@
+import { ITranslatable } from "../../ITranslatable";
+
 export interface IEditCountry {
-    id: number,
-    name_ru: string,
-    name_en: string,
+    id: number | null,
+    name: ITranslatable,
+    edit?: boolean,
 }

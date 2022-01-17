@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next"
-import Header from "../../../components/Header/Header"
 import AppLayout from "../../../layouts/AppLayout"
 import { useQuery } from '@apollo/client'
 import { useState } from "react"
@@ -8,23 +7,34 @@ import MiniLoader from "../../../components/Loader/MiniLoader"
 import { IoPencilOutline, IoTrashOutline } from "react-icons/io5"
 import toast from "react-hot-toast"
 import LocationNav from "../LocationNav"
-import { COUNTRIES } from "../../../graphql/queries/Location/Country/getCountriesQuery"
+import { GET_COUNTRIES } from "../../../graphql/queries/Location/Country/getCountriesQuery"
 import getByLocale from "../../../common/helpers/getByLocale"
 import Modal from '../../../components/Modal/Modal'
 import AddCountry from "./AddCountry"
 import { IDeleteModal } from "../../../common/interfaces/IDeleteModal"
 import DeleteCountry from "./DeleteCountry"
+import { IEditCountry } from "../../../common/interfaces/Location/Country/IEditCountry"
+import EditCountry from "./EditCountry"
+import { ITranslatable } from "../../../common/interfaces/ITranslatable"
 
 const Countries: React.FC = () => {
     const {t} = useTranslation()
     const [page, setPage] = useState<number>(1)
     const [addModal, setAddModal] = useState<boolean>(false)
+    const [editModal, setEditModal] = useState<IEditCountry>({
+        id: null,
+        name: {
+            ru: "",
+            en: "",
+        },
+        edit: false,
+    })
     const [deleteModal, setDeleteModal] = useState<IDeleteModal>({
         id: null,
         delete: false
     })
 
-    const {loading, data} = useQuery(COUNTRIES, {
+    const {loading, data} = useQuery(GET_COUNTRIES, {
         variables: {page},
         onError: () => toast.error(t('error_not_loaded'), {duration: 2000})
     })
@@ -33,23 +43,25 @@ const Countries: React.FC = () => {
         setAddModal(!addModal)
     }
 
-    const toggleDeleteModal = (id: number | null = null) => {
+    const toggleDeleteModal = (id: number | null = null): void => {
         setDeleteModal({delete: !deleteModal.delete, id})
+    }
+
+    const toggleEditModal = (id: number | null = null, name: ITranslatable): void => {
+        setEditModal({edit: !editModal.edit, id, name})
     }
 
     return (
         <AppLayout>
             <section className="xl:p-5 p-1">
-            <Header>
-                <h1 className="text-lg font-bold">
-                    {t('countries')}
-                </h1>
-            </Header>
-
             <LocationNav />
 
             <Modal isOpen={addModal} close={toggleAddModal}>
                 <AddCountry close={toggleAddModal} />
+            </Modal>
+
+            <Modal isOpen={editModal.edit} close={toggleEditModal}>
+                <EditCountry id={editModal.id} name={editModal.name} close={toggleEditModal} />
             </Modal>
 
             <Modal isOpen={deleteModal.delete} close={toggleDeleteModal}>
@@ -97,7 +109,10 @@ const Countries: React.FC = () => {
                                                 </td>
                                                 <td className="px-3 py-2">
                                                     <div className="flex">
-                                                        <button className="border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white duration-300 w-8 h-8 mx-1 flex items-center justify-center rounded-full">
+                                                        <button
+                                                            onClick={() => toggleEditModal(country.id, country.name)}
+                                                            className="border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white duration-300 w-8 h-8 mx-1 flex items-center justify-center rounded-full"
+                                                        >
                                                             <IoPencilOutline size={18} />
                                                         </button>
 

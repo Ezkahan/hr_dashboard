@@ -1,4 +1,3 @@
-import Header from "../../components/Header/Header"
 import AppLayout from "../../layouts/AppLayout"
 import { useTranslation } from "react-i18next"
 import React, { useState } from "react"
@@ -69,15 +68,6 @@ const CreateCompany: React.FC = () => {
     return (
         <AppLayout>
             <section className="xl:p-5 p-1">
-                <Header>
-                    <div>
-                        <h1 className="text-lg font-bold">
-                            {t('companies')}
-                        </h1>
-                        <small className="text-slate-500"> {t('new_company')} </small>
-                    </div>
-                </Header>
-
                 <form onSubmit={(e) => onSubmit(e)} className="bg-white xl:px-8 px-5 xl:py-6 py-4 xl:my-5 my-3 rounded-lg">
                     <h1 className="text-lg font-montserrat-bold">
                         {t('new_company')}

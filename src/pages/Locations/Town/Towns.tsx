@@ -1,48 +1,73 @@
 import { useTranslation } from "react-i18next"
-import Header from "../../components/Header/Header"
-import AppLayout from "../../layouts/AppLayout"
-import { gql, useQuery } from '@apollo/client'
+import AppLayout from "../../../layouts/AppLayout"
+import { useQuery } from '@apollo/client'
 import { useState } from "react"
 import ReactPaginate from 'react-paginate'
-import { NavLink } from "react-router-dom"
-import MiniLoader from "../../components/Loader/MiniLoader"
-import { IoEyeOutline, IoPencilOutline, IoTrashOutline } from "react-icons/io5"
-import toast from "react-hot-toast"
-import LocationNav from "./LocationNav"
+import MiniLoader from "../../../components/Loader/MiniLoader"
+import { IoPencilOutline, IoTrashOutline } from "react-icons/io5"
+import LocationNav from "../LocationNav"
+import { IDeleteModal } from "../../../common/interfaces/IDeleteModal"
+import { ITranslatable } from "../../../common/interfaces/ITranslatable"
+import { IEditTown } from "../../../common/interfaces/Location/Town/IEditTown"
+import Modal from "../../../components/Modal/Modal"
+import AddTown from "./AddTown"
+import EditTown from "./EditTown"
+import DeleteTown from "./DeleteTown"
+import getByLocale from "../../../common/helpers/getByLocale"
+import { GET_TOWNS } from "../../../graphql/queries/Location/Town/getTownsQuery"
+import { ITown } from "../../../common/interfaces/Location/Town/ITown"
 
-const Areas: React.FC = () => {
+const Towns: React.FC = () => {
     const {t} = useTranslation()
     const [page, setPage] = useState(1)
 
-    const _AREAS = gql`
-        query GetAreas {
-            areas(first: 30, page: ${page}, orderBy: [{column: ID, order: DESC}]) {
-                data {
-                    id
-                    name
-                }
-                paginatorInfo {
-                    total
-                    lastPage
-                }
-            }
-        }
-    `;
-
-    const {loading, data} = useQuery(_AREAS, {
-        onError: () => toast.error(t('error_not_loaded'), {duration: 2000})
+    const [addModal, setAddModal] = useState<boolean>(false)
+    const [editModal, setEditModal] = useState<IEditTown>({
+        id: null,
+        name: {
+            ru: "",
+            en: "",
+        },
+        area_id: null,
+        edit: false,
     })
+    const [deleteModal, setDeleteModal] = useState<IDeleteModal>({
+        id: null,
+        delete: false
+    })
+
+    const {loading, data} = useQuery(GET_TOWNS, {
+        variables: {page}
+    })
+
+    const toggleAddModal = () => {
+        setAddModal(!addModal)
+    }
+
+    const toggleDeleteModal = (id: number | null = null): void => {
+        setDeleteModal({delete: !deleteModal.delete, id})
+    }
+
+    const toggleEditModal = (id: number | null = null, area_id: number | null = null, name: ITranslatable): void => {
+        setEditModal({edit: !editModal.edit, id, name, area_id})
+    }
 
     return (
         <AppLayout>
             <section className="xl:p-5 p-1">
-            <Header>
-                <h1 className="text-lg font-bold">
-                    {t('areas')}
-                </h1>
-            </Header>
-
             <LocationNav />
+
+            <Modal isOpen={addModal} close={toggleAddModal}>
+                <AddTown close={toggleAddModal} />
+            </Modal>
+
+            <Modal isOpen={editModal.edit} close={toggleEditModal}>
+                <EditTown id={editModal.id} name={editModal.name} area_id={editModal.area_id} close={toggleEditModal} />
+            </Modal>
+
+            <Modal isOpen={deleteModal.delete} close={toggleDeleteModal}>
+                <DeleteTown id={deleteModal.id} close={toggleDeleteModal} />
+            </Modal>
 
             <main className="bg-white xl:px-8 px-6 xl:py-6 py-4 mb-5 rounded-lg">
                 <header className=" flex justify-between items-center py-3 mb-5">
@@ -51,9 +76,9 @@ const Areas: React.FC = () => {
                     </div>
 
                     <div className="ml-5">
-                        <NavLink to="/area/add" className="border border-indigo-500 hover:bg-indigo-600 text-indigo-600 hover:text-white duration-300 px-4 py-2 rounded-lg">
+                        <button onClick={() => toggleAddModal()} className="border border-indigo-500 hover:bg-indigo-600 text-indigo-600 hover:text-white duration-300 px-4 py-2 rounded-lg">
                             {t('add')}
-                        </NavLink>
+                        </button>
                     </div>
                 </header>
 
@@ -62,7 +87,7 @@ const Areas: React.FC = () => {
                 }
 
                 {
-                    data && data.areas.data &&
+                    data && data.towns.data &&
 
                     <section className="overflow-x-auto">
                         <table className="w-full table-fixed text-sm">
@@ -73,28 +98,27 @@ const Areas: React.FC = () => {
                                     <th className="px-4 py-3 w-40 rounded-tr-lg rounded-br-lg">{t('options')}</th>
                                 </tr>
                             </thead>
-                            
-                            <tbody>
+
+                            <tbody> 
                                 {
-                                    data && data.areas.data.map((area: any, index: number) => {
+                                    data && data.towns.data.map((town: ITown, index: number) => {
                                         return (
                                             <tr key={index} className="border-b border-stone-100 text-indigo-900/80">
-                                                <td className="border-r border-stone-100 px-3 py-2 text-xs">{area.id}</td>
+                                                <td className="border-r border-stone-100 px-3 py-2 text-xs">{town.id}</td>
                                                 <td className="w-96 px-3 py-2">
-                                                    <h1 className="font-bold">{area.name}</h1>
+                                                    <h1 className="font-bold">{getByLocale(town.name)}</h1>
                                                 </td>
                                                 <td className="px-3 py-2">
                                                     <div className="flex">
-                                                        <NavLink to={`/area/${area.id}`} className="border border-emerald-500 text-emerald-500 hover:bg-emerald-500 hover:text-white duration-300 w-8 h-8 mx-1 flex items-center justify-center rounded-full">
-                                                            <IoEyeOutline size={18} />
-                                                        </NavLink>
-
-                                                        <NavLink to={`/area/${area.id}/edit`} className="border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white duration-300 w-8 h-8 mx-1 flex items-center justify-center rounded-full">
+                                                        <button
+                                                            onClick={() => toggleEditModal(town.id, town.area.id, town.name)}
+                                                            className="border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white duration-300 w-8 h-8 mx-1 flex items-center justify-center rounded-full"
+                                                        >
                                                             <IoPencilOutline size={18} />
-                                                        </NavLink>
+                                                        </button>
 
                                                         <button
-                                                            // onClick={() => toggleDeleteModal(company.id)}
+                                                            onClick={() => toggleDeleteModal(town.id)}
                                                             className="border border-red-500 text-red-500 hover:bg-red-500 hover:text-white duration-300 w-8 h-8 mx-1 flex items-center justify-center rounded-full"
                                                         >
                                                             <IoTrashOutline size={18} />
@@ -110,15 +134,15 @@ const Areas: React.FC = () => {
                     </section>
                 }
             </main>
-
+            
             {
-                data && data.areas.paginatorInfo.lastPage > 1 &&
+                data && data.towns.paginatorInfo.lastPage > 1 &&
                 <ReactPaginate
                     previousClassName={'hidden'}
                     nextClassName={'hidden'}
                     breakLabel={'...'}
                     breakClassName={'bg-white rounded-lg border-gray-300 text-gray-500 hover:bg-gray-50 md:inline-flex relative items-center m-1 px-4 py-2 border text-sm'}
-                    pageCount={data && data.areas.paginatorInfo.lastPage}
+                    pageCount={data && data.towns.paginatorInfo.lastPage}
                     marginPagesDisplayed={1}
                     pageRangeDisplayed={3}
                     onPageChange={(data) => setPage(data.selected+1)}
@@ -133,4 +157,4 @@ const Areas: React.FC = () => {
     )
 }
 
-export default Areas
+export default Towns

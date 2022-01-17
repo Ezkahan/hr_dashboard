@@ -29,6 +29,7 @@ const EN = {
     'search': 'Search',
     'new': 'New',
     'add': 'Add',
+    'edit': 'Edit',
     'create': 'Create',
     'update': 'Update',
     'save': 'Save',
@@ -79,6 +80,21 @@ const EN = {
     'add_new_country': 'Add new country',
     'country_name': 'Country name',
     'input_country_name': 'Input country name',
+
+    'add_new_town': 'Add new town',
+    'town_name': 'Town name',
+    'input_town_name': 'Input town name',
+    'town_area': 'Town area',
+
+    'new_location': 'New location',
+    'area_name': 'Area name',
+    'enter_area_name': 'Input area name',
+    'area_country': 'Town country',
+
+    'skill_type': 'Type of skill',
+    'add_new_skill': 'Add new skill',
+    'skill_name': 'Skill name',
+    'input_skill_name': 'Input skill name',
 
 }
 

@@ -7,24 +7,32 @@ import EN_FLAG from '../../../assets/icons/locales/en.jpg'
 import { useTranslation } from "react-i18next"
 import toast from "react-hot-toast"
 import { useMutation } from "@apollo/client"
-import { COUNTRIES } from "../../../graphql/queries/Location/Country/getCountriesQuery"
+import { GET_COUNTRIES } from "../../../graphql/queries/Location/Country/getCountriesQuery"
 import { IAddCountry } from "../../../common/interfaces/Location/Country/IAddCountry"
 import { IEditCountry } from "../../../common/interfaces/Location/Country/IEditCountry"
 import { UPDATE_COUNTRY } from "../../../graphql/mutations/Location/Country/updateCountryMutation"
+import { ITranslatable } from "../../../common/interfaces/ITranslatable"
 
-const EditCountry: React.FC<IModal & IEditCountry> = ({id, close}) => {
+const EditCountry: React.FC<IModal & IEditCountry> = ({id, name, close}) => {
     const { t } = useTranslation()
-    const [country, setCountry] = useState<IAddCountry>({
-        'name_ru': "",
-        'name_en': "",
+    const [country, setCountry] = useState<IEditCountry>({
+        id: id,
+        name: {
+            ru: name.ru,
+            en: name.en,
+        }
     })
 
     const changeHandler = (e: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => {
         setCountry({
             ...country,
-            [e.target.name]: e.target.value
+            name: {
+                ...country.name,
+                [e.target.name]: e.target.value
+            }
         })
     }
+
     const onCompleted = () => {
         toast.success(t('success_saved'), {duration: 1500}) && setTimeout(() => close(), 2000)
     }
@@ -34,7 +42,7 @@ const EditCountry: React.FC<IModal & IEditCountry> = ({id, close}) => {
         onError: () => {},
         refetchQueries: [
             {
-                query: COUNTRIES,
+                query: GET_COUNTRIES,
                 variables: {page: 1}
             }
         ]
@@ -46,8 +54,8 @@ const EditCountry: React.FC<IModal & IEditCountry> = ({id, close}) => {
         updateCountry({
             variables: {
                 id: id,
-                name_ru: country.name_ru,
-                name_en: country.name_en
+                name_ru: country.name.ru,
+                name_en: country.name.en
             }
         })
     }
@@ -55,7 +63,7 @@ const EditCountry: React.FC<IModal & IEditCountry> = ({id, close}) => {
     return (
         <form onSubmit={(e) => saveCountry(e)} className="p-3">
             <h1 className="text-xl font-montserrat-bold">
-                {t('edit_country')}
+                {t('edit')}
             </h1>
             <aside className="grid grid-cols-12 gap-5 mt-5 mb-8">
                 <div className="col-span-12 bg-slate-50 border border-slate-200 rounded-lg flex flex-col w-full overflow-hidden">
@@ -63,7 +71,15 @@ const EditCountry: React.FC<IModal & IEditCountry> = ({id, close}) => {
                         <small className="px-4 pt-2">{t('country_name')}</small>
                         <img src={RU_FLAG} alt="RU" className="w-6 h-4 mr-4 mt-2" />
                     </header>
-                    <input required name="name_ru" onChange={(e) => changeHandler(e)} type="text" className="bg-slate-50 px-4 py-2" placeholder={t('input_country_name')} />
+                    <input
+                        required
+                        name="ru"
+                        onChange={(e) => changeHandler(e)}
+                        type="text"
+                        className="bg-slate-50 px-4 py-2"
+                        value={country && country.name.ru}
+                        placeholder={t('input_country_name')}
+                    />
                 </div>
 
                 <div className="col-span-12 bg-slate-50 border border-slate-200 rounded-lg flex flex-col w-full overflow-hidden">
@@ -71,7 +87,15 @@ const EditCountry: React.FC<IModal & IEditCountry> = ({id, close}) => {
                         <small className="px-4 pt-2">{t('country_name')}</small>
                         <img src={EN_FLAG} alt="EN" className="w-6 h-4 mr-4 mt-2" />
                     </header>
-                    <input required name="name_en" onChange={(e) => changeHandler(e)} type="text" className="bg-slate-50 px-4 py-2" placeholder={t('input_country_name')} />
+                    <input
+                        required
+                        name="en"
+                        onChange={(e) => changeHandler(e)}
+                        type="text"
+                        className="bg-slate-50 px-4 py-2"
+                        value={country && country.name.en}
+                        placeholder={t('input_country_name')}
+                    />
                 </div>
             </aside>
 

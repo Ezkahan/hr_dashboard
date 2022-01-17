@@ -53,7 +53,7 @@ const Navbar: React.FC = () => {
                 <p className="px-3">{ t('skills') }</p>
             </NavLink>
 
-            <NavLink to="/locations" className="flex items-center px-6 py-3.5 text-slate-300 hover:bg-gradient-to-r hover:from-blue-800/50 hover:to-pink-500/5 hover:text-white duration-500">
+            <NavLink to="/countries" className="flex items-center px-6 py-3.5 text-slate-300 hover:bg-gradient-to-r hover:from-blue-800/50 hover:to-pink-500/5 hover:text-white duration-500">
                 <IoLocationOutline size={24}/>
                 <p className="px-3">{ t('locations') }</p>
             </NavLink>

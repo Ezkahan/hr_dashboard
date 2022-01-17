@@ -4,15 +4,13 @@ import { IoArrowForwardCircleOutline, IoLocationOutline } from "react-icons/io5"
 import { NavLink } from "react-router-dom"
 import { LOCATIONS_TOTAL } from "../../graphql/queries/Location/getLocationsTotal"
 
-
 const LocationNav: React.FC = () => {
     const { t } = useTranslation()
-
     const {data} = useQuery(LOCATIONS_TOTAL)
 
     return (
         <section className="grid grid-cols-12 gap-5 mb-5">
-                <NavLink to="/countries" className="col-span-12 xl:col-span-3 bg-white text-slate-700 flex items-center justify-between p-5 rounded-xl relative overflow-hidden group shadow-lg shadow-slate-200/50">
+                <NavLink to="/countries" className="col-span-6 xl:col-span-3 bg-white text-slate-700 flex items-center justify-between p-5 rounded-xl relative overflow-hidden group shadow-lg shadow-slate-200/50">
                     <aside className="flex items-center">
                         <IoLocationOutline className="text-slate-500 text-4xl group-hover:text-indigo-600 duration-300" />
                         <div className="flex flex-col ml-3">
@@ -28,11 +26,7 @@ const LocationNav: React.FC = () => {
                     <IoArrowForwardCircleOutline size={34} className="text-indigo-600 absolute top-7 -right-10 group-hover:right-5 duration-300" />
                 </NavLink>
 
-                {
-                    data && console.log(data)
-                }
-
-                <NavLink to="/towns" className="col-span-12 xl:col-span-3 bg-white text-slate-700 flex items-center justify-between p-5 rounded-xl relative overflow-hidden group shadow-lg shadow-slate-200/50">
+                <NavLink to="/towns" className="col-span-6 xl:col-span-3 bg-white text-slate-700 flex items-center justify-between p-5 rounded-xl relative overflow-hidden group shadow-lg shadow-slate-200/50">
                     <aside className="flex items-center">
                         <IoLocationOutline className="text-slate-500 text-4xl group-hover:text-indigo-600 duration-300" />
                         <div className="flex flex-col ml-3">
@@ -48,7 +42,7 @@ const LocationNav: React.FC = () => {
                     <IoArrowForwardCircleOutline size={34} className="text-indigo-600 absolute top-7 -right-10 group-hover:right-5 duration-300" />
                 </NavLink>
 
-                <NavLink to="/areas" className="col-span-12 xl:col-span-3 bg-white text-slate-700 flex items-center justify-between p-5 rounded-xl relative overflow-hidden group shadow-lg shadow-slate-200/50">
+                <NavLink to="/areas" className="col-span-6 xl:col-span-3 bg-white text-slate-700 flex items-center justify-between p-5 rounded-xl relative overflow-hidden group shadow-lg shadow-slate-200/50">
                     <aside className="flex items-center">
                         <IoLocationOutline className="text-slate-500 text-4xl group-hover:text-indigo-600 duration-300" />
                         <div className="flex flex-col ml-3">
@@ -64,7 +58,7 @@ const LocationNav: React.FC = () => {
                     <IoArrowForwardCircleOutline size={34} className="text-indigo-600 absolute top-7 -right-10 group-hover:right-5 duration-300" />
                 </NavLink>
 
-                <NavLink to="/addresses" className="col-span-12 xl:col-span-3 bg-white text-slate-700 flex items-center justify-between p-5 rounded-xl relative overflow-hidden group shadow-lg shadow-slate-200/50">
+                <NavLink to="/addresses" className="col-span-6 xl:col-span-3 bg-white text-slate-700 flex items-center justify-between p-5 rounded-xl relative overflow-hidden group shadow-lg shadow-slate-200/50">
                     <aside className="flex items-center">
                         <IoLocationOutline className="text-slate-500 text-4xl group-hover:text-indigo-600 duration-300" />
                         <div className="flex flex-col ml-3">

@@ -1,7 +1,6 @@
 import { useTranslation } from "react-i18next"
 import { IoBusinessOutline, IoNewspaperOutline, IoPeopleOutline } from "react-icons/io5"
 import { NavLink } from "react-router-dom"
-import Header from "../../components/Header/Header"
 import AppLayout from "../../layouts/AppLayout"
 import { gql, useQuery } from "@apollo/client" 
 
@@ -33,11 +32,6 @@ const Dashboard: React.FC = () => {
     return (
         <AppLayout>
             <section className="xl:p-5">
-            <Header>
-                <h1 className="text-lg font-bold">
-                    {t('dashboard')}
-                </h1>
-            </Header>
 
             <main className="bg-white grid grid-cols-12 gap-6 my-3 rounded-3xl p-5">
                 <NavLink to="/companies" className="col-span-12 xl:col-span-4 flex items-center justify-between bg-sky-100/50 text-sky-900/80 p-4 rounded-3xl hover:bg-sky-200 hover:scale-105 duration-500">

@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next"
-import Header from "../../components/Header/Header"
 import AppLayout from "../../layouts/AppLayout"
 import { useQuery } from '@apollo/client'
 import { useState } from "react"
@@ -10,13 +9,13 @@ import { IoPencilOutline, IoTrashOutline } from "react-icons/io5"
 import LocationNav from "./LocationNav"
 import toast from "react-hot-toast"
 import getByLocale from "../../common/helpers/getByLocale"
-import { COUNTRIES } from "../../graphql/queries/Location/Country/getCountriesQuery"
+import { GET_COUNTRIES } from "../../graphql/queries/Location/Country/getCountriesQuery"
 
 const Locations: React.FC = () => {
     const {t} = useTranslation()
     const [page, setPage] = useState(1)
 
-    const {loading, data} = useQuery(COUNTRIES, {
+    const {loading, data} = useQuery(GET_COUNTRIES, {
         variables: {page},
         onError: () => toast.error(t('error_not_loaded'), {duration: 2000})
     })
@@ -24,12 +23,6 @@ const Locations: React.FC = () => {
     return (
         <AppLayout>
             <section className="xl:p-5 p-1">
-            <Header>
-                <h1 className="text-lg font-bold">
-                    {t('locations')}
-                </h1>
-            </Header>
-
             <LocationNav />
 
             <main className="bg-white xl:px-8 px-6 xl:py-6 py-4 mb-5 rounded-lg">

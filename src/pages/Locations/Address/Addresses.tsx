@@ -1,58 +1,27 @@
 import { useTranslation } from "react-i18next"
-import Header from "../../components/Header/Header"
-import AppLayout from "../../layouts/AppLayout"
 import { gql, useQuery } from '@apollo/client'
 import { useState } from "react"
 import ReactPaginate from 'react-paginate'
 import { NavLink } from "react-router-dom"
-import MiniLoader from "../../components/Loader/MiniLoader"
-import { IoLocationOutline, IoArrowForwardCircleOutline } from "react-icons/io5"
-import LocationNav from "./LocationNav"
 import toast from "react-hot-toast"
+import AppLayout from "../../../layouts/AppLayout"
+import LocationNav from "../LocationNav"
+import MiniLoader from "../../../components/Loader/MiniLoader"
+import { GET_ADDRESSES } from "../../../graphql/queries/Location/Address/getAddressesQuery"
+import getByLocale from "../../../common/helpers/getByLocale"
 
 const Addresses: React.FC = () => {
     const {t} = useTranslation()
     const [page, setPage] = useState(1)
 
-    const _ADDRESSES = gql`
-        query GetAddresses {
-            addresses(first: 30, page: ${page}, orderBy: [{column: ID, order: DESC}]) {
-                data {
-                    id
-                    address
-                    district
-                    status
-                    country {
-                        name
-                    }
-                    town {
-                        name
-                    }
-                    area {
-                        name
-                    }
-                }
-                paginatorInfo {
-                    total
-                    lastPage
-                }
-            }
-        }
-    `;
-
-    const {loading, data} = useQuery(_ADDRESSES, {
+    const {loading, data} = useQuery(GET_ADDRESSES, {
+        variables: {page},
         onError: () => toast.error(t('error_not_loaded'), {duration: 2000})
     })
 
     return (
         <AppLayout>
             <section className="xl:p-5 p-1">
-            <Header>
-                <h1 className="text-lg font-bold">
-                    {t('addresses')}
-                </h1>
-            </Header>
-
             <LocationNav />
 
             <main className="bg-white xl:px-8 px-6 xl:py-6 py-4 mb-5 rounded-lg">
@@ -62,9 +31,9 @@ const Addresses: React.FC = () => {
                     </div>
 
                     <div className="ml-5">
-                        <NavLink to="/address/add" className="border border-indigo-500 hover:bg-indigo-600 text-indigo-600 hover:text-white duration-300 px-4 py-2 rounded-lg">
+                        <button disabled className="opacity-20 border border-indigo-500 hover:bg-indigo-600 text-indigo-600 hover:text-white duration-300 px-4 py-2 rounded-lg">
                             {t('add')}
-                        </NavLink>
+                        </button>
                     </div>
                 </header>
 
@@ -99,14 +68,14 @@ const Addresses: React.FC = () => {
                                                     <h1 className="font-bold">{address.address}</h1>
                                                 </td>
                                                 <td className="px-3 py-2">
-                                                    <h1 className="font-bold">{address.country && address.country.name}</h1>
+                                                    <h1 className="font-bold">{address.country && getByLocale(address.country.name)}</h1>
                                                 </td>
                                                 <td className="px-3 py-2">
-                                                    <h1 className="font-bold">{address.town && address.town.name}</h1>
+                                                    <h1 className="font-bold">{address.town && getByLocale(address.town.name)}</h1>
                                                 </td>
 
                                                 <td className="px-3 py-2">
-                                                    <h1 className="font-bold">{address.area && address.area.name}</h1>
+                                                    <h1 className="font-bold">{address.area && getByLocale(address.area.name)}</h1>
                                                 </td>
 
                                                 <td className="px-3 py-2">

@@ -1,5 +1,4 @@
 import { useQuery } from '@apollo/client'
-import Header from "../../components/Header/Header"
 import AppLayout from "../../layouts/AppLayout"
 import { useTranslation } from "react-i18next"
 import { useState } from 'react'
@@ -35,11 +34,6 @@ const Companies: React.FC = () => {
     return (
         <AppLayout>
             <section className="xl:p-5 p-1">
-            <Header>
-                <h1 className="text-lg font-bold">
-                    {t('companies')}
-                </h1>
-            </Header>
 
             <Modal isOpen={companyDelete.delete} close={toggleDeleteModal}>
                 <DeleteCompany id={companyDelete.id} close={toggleDeleteModal} />

@@ -38,11 +38,11 @@ const DeleteCompany: React.FC<IDeleteModal & IModal> = ({id, close}) => {
                 className="bg-red-400 hover:bg-red-600 duration-300 text-white px-5 py-2.5 flex items-center rounded-lg mx-3"
             >
                 <IoTrashOutline size={20} />
-                <p className="mx-2"> {t('yes_delete')} </p>
+                <p className="mx-2"> {t('yes')} </p>
             </button>
 
-            <button className="bg-slate-100 text-gray-600 hover:bg-slate-200 hover:text-gray-800 duration-300 px-5 py-2.5 flex items-center rounded-lg mx-3">
-                <p className="mx-2"> {t('no_cancel')} </p>
+            <button onClick={() => close()} className="bg-slate-100 text-gray-600 hover:bg-slate-200 hover:text-gray-800 duration-300 px-5 py-2.5 flex items-center rounded-lg mx-3">
+                <p className="mx-2"> {t('no')} </p>
             </button>
           </footer>
         </main>

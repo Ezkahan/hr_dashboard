@@ -1,4 +1,3 @@
-import Header from "../../components/Header/Header"
 import AppLayout from "../../layouts/AppLayout"
 import { useTranslation } from "react-i18next"
 import React, { useState } from "react"
@@ -96,15 +95,6 @@ const EditCompany: React.FC = () => {
     return (
         <AppLayout>
             <section className="xl:p-5 p-1">
-                <Header>
-                    <div>
-                        <h1 className="text-lg font-bold">
-                            {t('companies')}
-                        </h1>
-                        <small className="text-slate-500"> {t('edit_company')} </small>
-                    </div>
-                </Header>
-
                 {
                     loading && <MiniLoader />
                 }

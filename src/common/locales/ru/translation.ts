@@ -29,6 +29,7 @@ const RU = {
     'search': 'Поиск',
     'new': 'Новый',
     'add': 'Добавить',
+    'edit': 'Изменить',
     'create': 'Создать',
     'update': 'Обновить',
     'save': 'Сохранить',
@@ -79,6 +80,23 @@ const RU = {
     'add_new_country': 'Добавить новую страну',
     'country_name': 'Название страны',
     'input_country_name': 'Введите название страны',
+
+    'add_new_town': 'Добавить новый город',
+    'town_name': 'Название города',
+    'input_town_name': 'Введите название города',
+    'town_area': 'Местоположение',
+
+    'new_location': 'Новое место',
+    'area_name': 'Название области',
+    'enter_area_name': 'Введите имя области',
+    'area_country': 'Town country',
+
+
+    'skill_type': 'Тип навыка',
+    'add_new_skill': 'Добавить новый навык',
+    'skill_name': 'Название навыка',
+    'input_skill_name': 'Введите название навыка',
+
 }
 
 export default RU

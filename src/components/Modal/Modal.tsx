@@ -9,7 +9,7 @@ const Modal: React.FC<IModal> = ({isOpen, children, close}) => {
         <>
         <div
           onClick={() => close()}
-          className="bg-violet-300 backdrop-filter backdrop-blur-lg bg-opacity-70 z-50 fixed w-screen h-screen top-0 left-0"></div>
+          className="bg-slate-300 backdrop-filter backdrop-blur-lg bg-opacity-70 z-50 fixed w-screen h-screen top-0 left-0"></div>
           <ReactTooltip className="font-montserrat-bold" />
           <section className="flex items-center justify-center fixed w-screen h-screen top-0 left-0 z-50 font-montserrat-medium">
             <motion.main
