@@ -1,37 +1,37 @@
 import React, { useState } from "react"
-import { IModal } from '../../../common/interfaces/IModal'
 import {IoArrowUndoCircleOutline, IoCheckmarkCircleOutline} from 'react-icons/io5'
 
-import RU_FLAG from '../../../assets/icons/locales/ru.jpg'
-import EN_FLAG from '../../../assets/icons/locales/en.jpg'
+import RU_FLAG from '../../assets/icons/locales/ru.jpg'
+import EN_FLAG from '../../assets/icons/locales/en.jpg'
 import { useTranslation } from "react-i18next"
 import toast from "react-hot-toast"
 import { useMutation, useQuery } from "@apollo/client"
-import getByLocale from "../../../common/helpers/getByLocale"
-import { IEditArea } from "../../../common/interfaces/Location/Area/IEditArea"
-import { GET_COUNTRY_LIST } from "../../../graphql/queries/Location/Country/getCountryListQuery"
-import { UPDATE_AREA } from "../../../graphql/mutations/Location/Area/updateAreaMutation"
-import { GET_AREAS } from "../../../graphql/queries/Location/Area/getAreasQuery"
+import { IModal } from "../../common/interfaces/IModal"
+import { IEditSchool } from "../../common/interfaces/School/IEditSchool"
+import { GET_SCHOOL_TYPES } from "../../graphql/queries/School/getSchoolTypesQuery"
+import { UPDATE_SCHOOL } from "../../graphql/mutations/School/updateSchoolMutation"
+import { GET_SCHOOLS } from "../../graphql/queries/School/getSchoolsQuery"
+import getByLocale from "../../common/helpers/getByLocale"
 
-const EditArea: React.FC<IModal & IEditArea> = ({id, name, country_id, close}) => {
+const EditSchool: React.FC<IModal & IEditSchool> = ({id, name, school_type_id, close}) => {
     const { t } = useTranslation()
-    const [area, setArea] = useState<IEditArea>({
+    const [school, setSchool] = useState<IEditSchool>({
         id: id,
         name: {
             ru: name.ru,
             en: name.en,
         },
-        country_id: country_id,
+        school_type_id: school_type_id,
     })
 
     const changeHandler = (e: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement|HTMLSelectElement>) => {
-        setArea({
-            ...area,
+        setSchool({
+            ...school,
             name: {
-                ...area.name,
+                ...school.name,
                 [e.target.name]: e.target.value
             },
-            country_id: e.target.name === 'country_id' ? parseInt(e.target.value) : area.country_id
+            school_type_id: e.target.name === 'school_type_id' ? parseInt(e.target.value) : school.school_type_id
         })
     }
 
@@ -39,41 +39,41 @@ const EditArea: React.FC<IModal & IEditArea> = ({id, name, country_id, close}) =
         toast.success(t('success_saved'), {duration: 1500}) && setTimeout(() => close(), 2000)
     }
 
-    const {data} = useQuery(GET_COUNTRY_LIST)
+    const {data} = useQuery(GET_SCHOOL_TYPES)
 
-    const [updateArea] = useMutation(UPDATE_AREA, {
+    const [updateSchool] = useMutation(UPDATE_SCHOOL, {
         onCompleted,
         onError: () => {},
         refetchQueries: [
             {
-                query: GET_AREAS,
+                query: GET_SCHOOLS,
                 variables: {page: 1}
             }
         ]
     })
 
-    const saveArea = (e: React.SyntheticEvent) => {
+    const saveSchool = (e: React.SyntheticEvent) => {
         e.preventDefault()
-
-        updateArea({
+        
+        updateSchool({
             variables: {
                 id: id,
-                name_ru: area.name.ru,
-                name_en: area.name.en,
-                country_id: area.country_id,
+                name_ru: school.name.ru,
+                name_en: school.name.en,
+                school_type_id: school.school_type_id,
             }
         })
     }
 
     return (
-        <form onSubmit={(e) => saveArea(e)} className="p-3">
+        <form onSubmit={(e) => saveSchool(e)} className="p-3">
             <h1 className="text-xl font-montserrat-bold">
                 {t('edit')}
             </h1>
             <aside className="grid grid-cols-12 gap-5 my-5">
                 <div className="col-span-12 bg-slate-50 border border-slate-200 rounded-lg flex flex-col w-full overflow-hidden">
                     <header className="flex items-center justify-between">
-                        <small className="px-4 pt-2 text-slate-400">{t('town_name')}</small>
+                        <small className="px-4 pt-2 text-slate-400">{t('school_name')}</small>
                         <img src={RU_FLAG} alt="RU" className="w-6 h-4 mr-4 mt-2" />
                     </header>
                     <input
@@ -82,14 +82,14 @@ const EditArea: React.FC<IModal & IEditArea> = ({id, name, country_id, close}) =
                         onChange={(e) => changeHandler(e)}
                         type="text"
                         className="bg-slate-50 px-4 py-2"
-                        value={area && area.name.ru}
-                        placeholder={t('input_area_name')}
+                        value={school && school.name.ru}
+                        placeholder={t('input_school_name')}
                     />
                 </div>
 
                 <div className="col-span-12 bg-slate-50 border border-slate-200 rounded-lg flex flex-col w-full overflow-hidden">
                     <header className="flex items-center justify-between">
-                        <small className="px-4 pt-2 text-slate-400">{t('area_name')}</small>
+                        <small className="px-4 pt-2 text-slate-400">{t('school_name')}</small>
                         <img src={EN_FLAG} alt="EN" className="w-6 h-4 mr-4 mt-2" />
                     </header>
                     <input
@@ -98,28 +98,28 @@ const EditArea: React.FC<IModal & IEditArea> = ({id, name, country_id, close}) =
                         onChange={(e) => changeHandler(e)}
                         type="text"
                         className="bg-slate-50 px-4 py-2"
-                        value={area && area.name.en}
-                        placeholder={t('input_area_name')}
+                        value={school && school.name.en}
+                        placeholder={t('input_school_name')}
                     />
                 </div>
             </aside>
 
             {
-                data && data.countryList &&
+                data && data.schoolTypes &&
                 <aside className="mb-5">
                     <div className="col-span-12 bg-slate-50 border border-slate-200 rounded-lg flex flex-col w-full overflow-hidden">
                     <header className="flex items-center justify-between">
-                        <small className="px-4 pt-2 text-slate-400">{t('area_country')}</small>
+                        <small className="px-4 pt-2 text-slate-400">{t('school_type')}</small>
                     </header>
                     <select
-                        name="country_id"
+                        name="school_type_id"
                         onChange={(e) => changeHandler(e)}
                         className="bg-transparent px-4 py-2.5 w-full appearance-none"
                     >
                         {
-                            data.countryList.map((country: any, index: number) => {
+                            data.schoolTypes.map((schoolType: any, index: number) => {
                                 return (
-                                    <option selected={country.id === area.country_id} key={index} value={country.id}> { getByLocale(country.name) } </option>
+                                    <option selected={schoolType.id === school.school_type_id} key={index} value={schoolType.id}> { getByLocale(schoolType.name) } </option>
                                 )
                             })
                         }
@@ -143,4 +143,4 @@ const EditArea: React.FC<IModal & IEditArea> = ({id, name, country_id, close}) =
     )
 }
 
-export default EditArea
+export default EditSchool

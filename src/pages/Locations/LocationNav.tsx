@@ -14,12 +14,12 @@ const LocationNav: React.FC = () => {
                     <aside className="flex items-center">
                         <IoLocationOutline className="text-slate-500 text-4xl group-hover:text-indigo-600 duration-300" />
                         <div className="flex flex-col ml-3">
-                            <h1 className="text-lg font-montserrat-bold">
+                            <h1 className="text-lg font-montserrat-bold group-hover:text-indigo-600">
                                 {t('countries')}
                             </h1>
                             <div className="flex">
-                                <small className="text-slate-500 text-xs mr-1"> {t('total')}: </small>
-                                <small className="text-slate-500 text-xs"> { data && data.countries.paginatorInfo.total } </small>
+                                <small className="text-slate-500 group-hover:text-indigo-400 text-xs mr-1"> {t('total')}: </small>
+                                <small className="text-slate-500 group-hover:text-indigo-400 text-xs"> { data && data.countries.paginatorInfo.total } </small>
                             </div>
                         </div>
                     </aside>
@@ -30,12 +30,12 @@ const LocationNav: React.FC = () => {
                     <aside className="flex items-center">
                         <IoLocationOutline className="text-slate-500 text-4xl group-hover:text-indigo-600 duration-300" />
                         <div className="flex flex-col ml-3">
-                            <h1 className="text-lg font-montserrat-bold">
+                            <h1 className="text-lg font-montserrat-bold group-hover:text-indigo-600">
                                 {t('towns')}
                             </h1>
                             <div className="flex">
-                                <small className="text-slate-500 text-xs mr-1"> {t('total')}: </small>
-                                <small className="text-slate-500 text-xs"> { data && data.towns.paginatorInfo.total } </small>
+                                <small className="text-slate-500 group-hover:text-indigo-400 text-xs mr-1"> {t('total')}: </small>
+                                <small className="text-slate-500 group-hover:text-indigo-400 text-xs"> { data && data.towns.paginatorInfo.total } </small>
                             </div>
                         </div>
                     </aside>
@@ -46,12 +46,12 @@ const LocationNav: React.FC = () => {
                     <aside className="flex items-center">
                         <IoLocationOutline className="text-slate-500 text-4xl group-hover:text-indigo-600 duration-300" />
                         <div className="flex flex-col ml-3">
-                            <h1 className="text-lg font-montserrat-bold">
+                            <h1 className="text-lg font-montserrat-bold group-hover:text-indigo-600">
                                 {t('areas')}
                             </h1>
                             <div className="flex">
-                                <small className="text-slate-500 text-xs mr-1"> {t('total')}: </small>
-                                <small className="text-slate-500 text-xs"> { data && data.areas.paginatorInfo.total } </small>
+                                <small className="text-slate-500 group-hover:text-indigo-400 text-xs mr-1"> {t('total')}: </small>
+                                <small className="text-slate-500 group-hover:text-indigo-400 text-xs"> { data && data.areas.paginatorInfo.total } </small>
                             </div>
                         </div>
                     </aside>
@@ -62,12 +62,12 @@ const LocationNav: React.FC = () => {
                     <aside className="flex items-center">
                         <IoLocationOutline className="text-slate-500 text-4xl group-hover:text-indigo-600 duration-300" />
                         <div className="flex flex-col ml-3">
-                            <h1 className="text-lg font-montserrat-bold">
+                            <h1 className="text-lg font-montserrat-bold group-hover:text-indigo-600">
                                 {t('addresses')}
                             </h1>
                             <div className="flex">
-                                <small className="text-slate-500 text-xs mr-1"> {t('total')}: </small>
-                                <small className="text-slate-500 text-xs"> { data && data.addresses.paginatorInfo.total } </small>
+                                <small className="text-slate-500 group-hover:text-indigo-400 text-xs mr-1"> {t('total')}: </small>
+                                <small className="text-slate-500 group-hover:text-indigo-400 text-xs"> { data && data.addresses.paginatorInfo.total } </small>
                             </div>
                         </div>
                     </aside>

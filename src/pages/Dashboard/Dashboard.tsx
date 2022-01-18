@@ -33,8 +33,8 @@ const Dashboard: React.FC = () => {
         <AppLayout>
             <section className="xl:p-5">
 
-            <main className="bg-white grid grid-cols-12 gap-6 my-3 rounded-3xl p-5">
-                <NavLink to="/companies" className="col-span-12 xl:col-span-4 flex items-center justify-between bg-sky-100/50 text-sky-900/80 p-4 rounded-3xl hover:bg-sky-200 hover:scale-105 duration-500">
+            <main className="bg-white grid grid-cols-12 gap-6 rounded-xl p-5">
+                <NavLink to="/companies" className="col-span-12 xl:col-span-4 flex items-center justify-between bg-sky-100/50 text-sky-900/80 p-4 rounded-2xl hover:bg-sky-200 hover:scale-105 duration-500">
                     <aside className="flex items-center px-2">
                         <IoBusinessOutline size={48} />
                         <div className="flex flex-col p-3">
@@ -42,13 +42,14 @@ const Dashboard: React.FC = () => {
                             <small className="mt-2"> {t('total')}: {data && data.companies.paginatorInfo.total} </small>
                         </div>
                     </aside>
-                    <div className="bg-white px-6 py-4 rounded-3xl">
+                    <div className="bg-white text-center px-6 py-4 rounded-3xl">
                         <h3 className="font-bold text-lg">+0</h3>
+                        <small className="text-xs">{t('new')}</small>
                     </div>
                 </NavLink>
 
 
-                <NavLink to="/vacancies" className="col-span-12 xl:col-span-4 flex items-center justify-between bg-emerald-100/70 text-emerald-900/80 p-4 rounded-3xl hover:bg-emerald-200 hover:scale-105 duration-500">
+                <NavLink to="/vacancies" className="col-span-12 xl:col-span-4 flex items-center justify-between bg-emerald-100/70 text-emerald-900/80 p-4 rounded-2xl hover:bg-emerald-200 hover:scale-105 duration-500">
                     <aside className="flex items-center px-2">
                         <IoNewspaperOutline size={48} />
                         <div className="flex flex-col p-3">
@@ -56,13 +57,14 @@ const Dashboard: React.FC = () => {
                             <small className="mt-2"> {t('total')}: {data && data.vacancies.paginatorInfo.total} </small>
                         </div>
                     </aside>
-                    <div className="bg-white px-6 py-4 rounded-3xl">
+                    <div className="bg-white text-center px-6 py-4 rounded-3xl">
                         <h3 className="font-bold text-lg">+0</h3>
+                        <small className="text-xs">{t('new')}</small>
                     </div>
                 </NavLink>
 
 
-                <NavLink to="/people" className="col-span-12 xl:col-span-4 flex items-center justify-between bg-amber-100/50 text-amber-900/80 p-4 rounded-3xl hover:bg-amber-200 hover:scale-105 duration-500">
+                <NavLink to="/people" className="col-span-12 xl:col-span-4 flex items-center justify-between bg-amber-100/50 text-amber-900/80 p-4 rounded-2xl hover:bg-amber-200 hover:scale-105 duration-500">
                     <aside className="flex items-center px-2">
                         <IoPeopleOutline size={48} />
                         <div className="flex flex-col p-3">
@@ -70,8 +72,9 @@ const Dashboard: React.FC = () => {
                             <small className="mt-2"> {t('total')}: {data && data.people.paginatorInfo.total} </small>
                         </div>
                     </aside>
-                    <div className="bg-white px-6 py-4 rounded-3xl">
+                    <div className="bg-white text-center px-6 py-4 rounded-3xl">
                         <h3 className="font-bold text-lg">+0</h3>
+                        <small className="text-xs">{t('new')}</small>
                     </div>
                 </NavLink>
             </main>

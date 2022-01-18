@@ -6,7 +6,7 @@ import ReactPaginate from 'react-paginate'
 import MiniLoader from '../../components/Loader/MiniLoader'
 import { NavLink } from 'react-router-dom'
 import { GET_COMPANIES } from '../../graphql/queries/Company/getCompaniesQuery'
-import { IoEyeOutline, IoPencilOutline, IoTrashOutline } from 'react-icons/io5'
+import { IoAddOutline, IoBusinessOutline, IoEyeOutline, IoPencilOutline, IoTrashOutline } from 'react-icons/io5'
 import toast from 'react-hot-toast'
 import Modal from '../../components/Modal/Modal'
 import { ICompanyList } from '../../common/interfaces/Company/ICompanyList'
@@ -40,14 +40,23 @@ const Companies: React.FC = () => {
             </Modal>
 
             <main className="bg-white xl:px-8 px-6 xl:py-6 py-4 mb-5 rounded-lg">
-                <header className=" flex justify-between items-center py-3 mb-5">
-                    <div className="w-full xl:w-4/12">
-                        <input type="text" className="border border-slate-200 px-5 py-2 rounded-lg w-full" placeholder={t('search')} />
-                    </div>
+                <header className=" flex justify-between items-center mb-5">
+                    <aside className="flex">
+                        <IoBusinessOutline size={48} className="text-indigo-800 mr-3" />
+                        <div className="flex flex-col">
+                            <h1 className="text-xl font-montserrat-bold text-indigo-800">
+                                {t('companies')}
+                            </h1>
+                            <small className="text-indigo-500">
+                                {t('total')}: <strong>{data?.companies?.paginatorInfo?.total}</strong>
+                            </small>
+                        </div>
+                    </aside>
 
                     <div className="ml-5">
-                        <NavLink to="/company/create" className="border border-indigo-500 hover:bg-indigo-600 text-indigo-600 hover:text-white duration-300 px-4 py-2 rounded-lg">
-                            {t('add')}
+                        <NavLink to="/company/create" className="flex items-center border border-indigo-500 hover:bg-indigo-600 text-indigo-600 hover:text-white duration-300 px-2 py-1.5 rounded-lg">
+                            <IoAddOutline size={22} />
+                            <p className="hidden xl:block">{t('add')}</p>
                         </NavLink>
                     </div>
                 </header>

@@ -4,7 +4,7 @@ const RU = {
     'vacancies': 'Вакансии',
     'companies': 'Компании',
     'people': 'Люди',
-    'educations': 'Образование',
+    'education': 'Образование',
     'schools': 'Учебные заведения',
     'skills': 'Навыки и умения',
     'locations': 'Локации',
@@ -96,6 +96,12 @@ const RU = {
     'add_new_skill': 'Добавить новый навык',
     'skill_name': 'Название навыка',
     'input_skill_name': 'Введите название навыка',
+
+    'education_type': 'Тип учебного заведения',
+    'add_new_school': 'Добавить школу',
+    'school_name': 'Название школы',
+    'input_school_name': 'Введите название школы',
+    'school_type': 'Тип школы',
 
 }
 

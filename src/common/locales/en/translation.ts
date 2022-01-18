@@ -4,7 +4,7 @@ const EN = {
     'vacancies': 'Vacancies',
     'companies': 'Companies',
     'people': 'People',
-    'educations': 'Educations',
+    'education': 'Education',
     'schools': 'Schools',
     'skills': 'Skills',
     'locations': 'Locations',
@@ -95,6 +95,9 @@ const EN = {
     'add_new_skill': 'Add new skill',
     'skill_name': 'Skill name',
     'input_skill_name': 'Input skill name',
+
+
+    'education_type': 'Education type',
 
 }
 

@@ -9,6 +9,7 @@ import LocationNav from "../LocationNav"
 import MiniLoader from "../../../components/Loader/MiniLoader"
 import { GET_ADDRESSES } from "../../../graphql/queries/Location/Address/getAddressesQuery"
 import getByLocale from "../../../common/helpers/getByLocale"
+import { IoAddOutline, IoLocationOutline } from "react-icons/io5"
 
 const Addresses: React.FC = () => {
     const {t} = useTranslation()
@@ -25,14 +26,23 @@ const Addresses: React.FC = () => {
             <LocationNav />
 
             <main className="bg-white xl:px-8 px-6 xl:py-6 py-4 mb-5 rounded-lg">
-                <header className=" flex justify-between items-center py-3 mb-5">
-                    <div className="w-full xl:w-4/12">
-                        <input type="text" className="border border-slate-200 px-5 py-2 rounded-lg w-full" placeholder={t('search')} />
-                    </div>
+                <header className=" flex justify-between items-center mb-5">
+                    <aside className="flex">
+                        <IoLocationOutline size={48} className="text-indigo-800 mr-2" />
+                        <div className="flex flex-col">
+                            <h1 className="text-xl font-montserrat-bold text-indigo-800">
+                                {t('addresses')}
+                            </h1>
+                            <small className="text-indigo-500">
+                                {t('total')}: <strong>{data?.addresses?.paginatorInfo?.total}</strong>
+                            </small>
+                        </div>
+                    </aside>
 
                     <div className="ml-5">
-                        <button disabled className="opacity-20 border border-indigo-500 hover:bg-indigo-600 text-indigo-600 hover:text-white duration-300 px-4 py-2 rounded-lg">
-                            {t('add')}
+                        <button disabled className="flex items-center opacity-20 border border-indigo-500 hover:bg-indigo-600 text-indigo-600 hover:text-white duration-300 px-2 py-1.5 rounded-lg">
+                            <IoAddOutline size={22} />
+                            <p className="hidden xl:block">{t('add')}</p>
                         </button>
                     </div>
                 </header>

@@ -4,28 +4,32 @@ export const LOCATIONS_TOTAL = gql`
 query GetCountriesTotal($page: Int) {
     countries(first: 30, page: $page, orderBy: [{column: ID, order: DESC}])
         {
-            paginatorInfo {
+            paginatorInfo
+            {
                 total
             }
         }
     
     areas(first: 30, page: $page, orderBy: [{column: ID, order: DESC}])
         {
-            paginatorInfo {
+            paginatorInfo
+            {
                 total
             }
         }
     
     towns(first: 30, page: $page, orderBy: [{column: ID, order: DESC}])
         {
-            paginatorInfo {
+            paginatorInfo
+            {
                 total
             }
         }
 
     addresses(first: 30, page: $page, orderBy: [{column: ID, order: DESC}])
         {
-            paginatorInfo {
+            paginatorInfo
+            {
                 total
             }
         }

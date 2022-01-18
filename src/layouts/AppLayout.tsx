@@ -4,9 +4,10 @@ import MainContainer from '../components/Main/MainContainer'
 import Sidebar from '../components/Navigation/Sidebar'
 import { Toaster } from "react-hot-toast"
 import ReactTooltip from "react-tooltip"
+import Cookie from 'js-cookie'
 
 const AppLayout = ({children}: IChildren) => {
-    const token = localStorage.getItem('orlan_token');
+    const token = Cookie.get('orlan_token');
 
     return (
         <>

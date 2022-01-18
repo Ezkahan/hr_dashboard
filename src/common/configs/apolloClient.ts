@@ -1,7 +1,8 @@
 import { ApolloClient, InMemoryCache} from "@apollo/client";
 import i18next from "i18next";
+import Cookies from "js-cookie";
 
-const token = localStorage.getItem('orlan_token')
+const token = Cookies.get('orlan_token')
 
 export const client = new ApolloClient({
     uri: 'http://localhost:8000/graphql',

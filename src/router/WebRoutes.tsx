@@ -34,7 +34,7 @@ const WebRoutes = () => {
             <Route path="/company/:id" element={<ShowCompany />} />
             <Route path="/vacancies" element={<Vacancies />} />
             <Route path="/people" element={<People />} />
-            <Route path="/educations" element={<Educations />} />
+            <Route path="/education" element={<Educations />} />
             <Route path="/schools" element={<Schools />} />
             <Route path="/skills" element={<Skills />} />
             <Route path="/locations" element={<Locations />} />
