@@ -7,7 +7,7 @@ import CreateCompany from '../pages/Companies/CreateCompany'
 import EditCompany from '../pages/Companies/EditCompany'
 import ShowCompany from '../pages/Companies/ShowCompany'
 import Dashboard from '../pages/Dashboard/Dashboard'
-import Educations from '../pages/Educations/Educations'
+import Education from '../pages/Education/Education'
 import Employees from '../pages/Employees/Employees'
 import Areas from '../pages/Locations/Area/Areas'
 import Countries from '../pages/Locations/Country/Countries'
@@ -34,7 +34,7 @@ const WebRoutes = () => {
             <Route path="/company/:id" element={<ShowCompany />} />
             <Route path="/vacancies" element={<Vacancies />} />
             <Route path="/people" element={<People />} />
-            <Route path="/education" element={<Educations />} />
+            <Route path="/education" element={<Education />} />
             <Route path="/schools" element={<Schools />} />
             <Route path="/skills" element={<Skills />} />
             <Route path="/locations" element={<Locations />} />
