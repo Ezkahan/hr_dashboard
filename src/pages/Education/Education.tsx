@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/client'
 import { useState } from "react"
 import ReactPaginate from 'react-paginate'
 import MiniLoader from "../../components/Loader/MiniLoader"
-import { IoAddOutline, IoBookOutline, IoPencilOutline, IoTrashOutline } from "react-icons/io5"
+import { IoAddOutline, IoPencilOutline, IoSchoolOutline, IoTrashOutline } from "react-icons/io5"
 import getByLocale from "../../common/helpers/getByLocale"
 import { IDeleteModal } from "../../common/interfaces/IDeleteModal"
 import { ITranslatable } from "../../common/interfaces/ITranslatable"
@@ -106,7 +106,7 @@ const Education: React.FC = () => {
             <main className="bg-white xl:px-8 px-6 xl:py-6 py-4 mb-5 rounded-lg">
                 <header className=" flex justify-between items-center mb-5">
                     <aside className="flex">
-                        <IoBookOutline size={48} className="text-indigo-800 mr-3" />
+                        <IoSchoolOutline size={48} className="text-indigo-800 mr-3" />
                         <div className="flex flex-col">
                             <h1 className="text-xl font-montserrat-bold text-indigo-800">
                                 {t('education')}
@@ -138,10 +138,17 @@ const Education: React.FC = () => {
                                 <tr className="border-b border-gray-100">
                                     <th className="px-4 py-3 w-20 xl:w-10 rounded-tl-lg rounded-bl-lg">{t('id')}</th>
                                     <th className="px-4 py-3 w-96">{t('name')}</th>
-                                    <th className="px-4 py-3 w-80">{t('education_type')}</th>
+                                    <th className="px-4 py-3 w-48">{t('country')}</th>
+                                    <th className="px-4 py-3 xl:w-24 w-28">{t('begin')}</th>
+                                    <th className="px-4 py-3 xl:w-24 w-28">{t('end')}</th>
+                                    <th className="px-4 py-3 w-44">{t('type')}</th>
                                     <th className="px-4 py-3 w-28 xl:w-24 rounded-tr-lg rounded-br-lg">{t('options')}</th>
                                 </tr>
                             </thead>
+
+                            {
+                                data && console.log(data)
+                            }
 
                             <tbody>
                                 {
@@ -152,7 +159,13 @@ const Education: React.FC = () => {
                                                 <td className="border-r border-stone-100 w-96 px-3 py-2">
                                                     <h1 className="font-bold">{getByLocale(education.name)}</h1>
                                                 </td>
-                                                <td className="border-stone-100 px-3 py-2">
+                                                <td className="border-r border-stone-100 w-48 px-3 py-2">
+                                                    <p>{education.country ? getByLocale(education.country.name) : t('unknown')}</p>
+                                                </td>
+                                                <td className="border-r border-stone-100 w-24 px-3 py-2">{education.begin}</td>
+                                                <td className="border-r border-stone-100 w-24 px-3 py-2">{education.end}</td>
+                                                
+                                                <td className="border-stone-100 w-44 px-3 py-2">
                                                     <p>{education.educationType && education.educationType.name ? getByLocale(education.educationType.name) : t('unknown')}</p>
                                                 </td>
                                                 <td className="px-3 py-2">

@@ -40,6 +40,9 @@ const RU = {
     'cancel': 'Отмена',
     'close': 'Закрыть',
     'options': 'Опции',
+    'type': 'Тип',
+    'begin': 'Начало',
+    'end': 'Окончание',
     'error_not_loaded': 'Ошибка не загружена',
     'error_not_saved': 'Ошибка не сохранена',
     'success_saved' : 'Успешно сохранено',
@@ -103,6 +106,13 @@ const RU = {
     'input_school_name': 'Введите название школы',
     'school_type': 'Тип школы',
 
+
+    'new_person': 'Новый человек',
+    'firstname': 'Имя',
+    'lastname': 'Фамилия',
+    'patronymic': 'Отчество',
+    'gender': 'Пол',
+    'min_salary': 'Мин зарплата',
 }
 
 export default RU

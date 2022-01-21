@@ -40,6 +40,9 @@ const EN = {
     'cancel': 'Cancel',
     'close': 'Close',
     'options': 'Options',
+    'type': 'Type',
+    'begin': 'Begin',
+    'ending': 'Ending',
     'error_not_loaded': 'Error not loaded',
     'error_not_saved': 'Error not saved',
     'success_saved' : 'Successfuly saved',
@@ -95,9 +98,14 @@ const EN = {
     'add_new_skill': 'Add new skill',
     'skill_name': 'Skill name',
     'input_skill_name': 'Input skill name',
-
-
     'education_type': 'Education type',
+
+    'new_person': 'New person',
+    'firstname': 'Firstname',
+    'lastname': 'Lastname',
+    'patronymic': 'Patronymic',
+    'gender': 'Gender',
+    'min_salary': 'Min salary',
 
 }
 

@@ -21,6 +21,7 @@ import Skills from '../pages/Skills/Skills'
 import Vacancies from '../pages/Vacancies/Vacancies'
 
 import Chat from '../pages/Dashboard/Chat'
+import AddPerson from '../pages/People/AddPerson'
 
 const WebRoutes = () => {
     return (
@@ -34,6 +35,7 @@ const WebRoutes = () => {
             <Route path="/company/:id" element={<ShowCompany />} />
             <Route path="/vacancies" element={<Vacancies />} />
             <Route path="/people" element={<People />} />
+            <Route path="/person/add" element={<AddPerson />} />
             <Route path="/education" element={<Education />} />
             <Route path="/schools" element={<Schools />} />
             <Route path="/skills" element={<Skills />} />
