@@ -8,9 +8,10 @@ export interface IEducation {
     begin: string,
     end: string | null,
     country: ICountry,
-    education_type_id: _EducationType,
+    education_type_id: IEducationType,
 }
 
-interface _EducationType {
-    id: number
+export interface IEducationType {
+    id: number,
+    name?: string
 }

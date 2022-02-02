@@ -36,4 +36,13 @@
         display: block;
         padding: .5rem 1rem;
     }
+
+    .h-115 {
+        height: 24.5rem;
+    }
+
+    .dropdown-height {
+        min-height: 3rem;
+        max-height: 25rem;
+    }
 }

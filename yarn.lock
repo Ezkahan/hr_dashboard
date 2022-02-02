@@ -1089,6 +1089,11 @@
   resolved "https://registry.npmjs.org/@csstools/normalize.css/-/normalize.css-12.0.0.tgz"
   integrity sha512-M0qqxAcwCsIVfpFQSlGN5XjXWu8l5JDZN+fPt1LeW5SZexQTgnaEvgXAY+CeygRw0EeppWHi12JxESWiWrB0Sg==
 
+"@djthoms/pretty-checkbox@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@djthoms/pretty-checkbox/-/pretty-checkbox-3.1.0.tgz#bc1d70533ec662b1f9bb372be17a970373c7f074"
+  integrity sha512-SToPkvm98m5GtHtwAQe5aJD0P5gSRj3HCuQaQKuYmLIAsXIb3/6WH08p9PPp1svDoJwvnGw4EZo3cQD6Hu4TFQ==
+
 "@emotion/cache@^11.4.0", "@emotion/cache@^11.7.1":
   version "11.7.1"
   resolved "https://registry.yarnpkg.com/@emotion/cache/-/cache-11.7.1.tgz#08d080e396a42e0037848214e8aa7bf879065539"
@@ -1970,6 +1975,13 @@
   integrity sha512-RNSXOyb3VyRs/EOGmjBhhGKTbnN6fHWvy5FNLzWfOWOGjgVUKqJZXfpKzLmgoU8h6Hj8mpALj/mbXQASOb92wQ==
   dependencies:
     "@types/history" "*"
+    "@types/react" "*"
+
+"@types/react-tabs@^2.3.4":
+  version "2.3.4"
+  resolved "https://registry.yarnpkg.com/@types/react-tabs/-/react-tabs-2.3.4.tgz#b63662ee52e59a86ec33b78b9721d8163a46394c"
+  integrity sha512-HQzhKW+RF/7h14APw/2cu4Nnt+GmsTvfBKbFdn/NbYpb8Q+iB65wIkPHz4VRKDxWtOpNFpOUtzt5r0LRmQMfOA==
+  dependencies:
     "@types/react" "*"
 
 "@types/react-transition-group@^4.4.0":
@@ -3037,7 +3049,7 @@ cliui@^7.0.2:
     strip-ansi "^6.0.0"
     wrap-ansi "^7.0.0"
 
-clsx@^1.1.1:
+clsx@^1.1.0, clsx@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.1.1.tgz#98b3134f9abbdf23b2663491ace13c5c03a73188"
   integrity sha512-6/bPho624p3S2pMyvP5kKBPXnI3ufHLObBFCfgx+LkeR5lg2XYy2hqZqUf45ypD8COn2bhgGJSUE+l5dhNBieA==
@@ -7301,7 +7313,7 @@ prompts@^2.0.1, prompts@^2.4.2:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2:
+prop-types@^15.5.0, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -7619,6 +7631,14 @@ react-spinners@^0.11.0:
   integrity sha512-rDZc0ABWn/M1OryboGsWVmIPg8uYWl0L35jPUhr40+Yg+syVPjeHwvnB7XWaRpaKus3M0cG9BiJA+ZB0dAwWyw==
   dependencies:
     "@emotion/react" "^11.1.4"
+
+react-tabs@^3.2.3:
+  version "3.2.3"
+  resolved "https://registry.yarnpkg.com/react-tabs/-/react-tabs-3.2.3.tgz#ccbb3e1241ad3f601047305c75db661239977f2f"
+  integrity sha512-jx325RhRVnS9DdFbeF511z0T0WEqEoMl1uCE3LoZ6VaZZm7ytatxbum0B8bCTmaiV0KsU+4TtLGTGevCic7SWg==
+  dependencies:
+    clsx "^1.1.0"
+    prop-types "^15.5.0"
 
 react-tooltip@^4.2.21:
   version "4.2.21"
