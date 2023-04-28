@@ -1,4 +1,4 @@
-# Orlan - Recruitment agency admin dashboard
+# Recruitment agency admin dashboard
 
 ## Available Scripts
 
