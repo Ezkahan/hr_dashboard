@@ -1,5 +1,7 @@
 # Recruitment agency admin dashboard
 
+![dashboard ui](dashboard.png)
+
 ## Available Scripts
 
 In the project directory, you can run:
